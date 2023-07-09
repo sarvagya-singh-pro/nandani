@@ -1,16 +1,18 @@
 import { useState,useEffect } from "react";
-import {getDoc,doc, updateDoc} from 'firebase/firestore'
+import {getDoc,doc, updateDoc, deleteDoc} from 'firebase/firestore'
 import {useRouter} from 'next/router'
 import {db,app} from '../../Firebaseconfig'
 import { Button, Checkbox, Header, Loader,Modal,PasswordInput,Text, TextInput } from "@mantine/core";
 import styles from '../../styles/Dashboard.module.css'
-import{getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import{deleteUser, getAuth, signInWithEmailAndPassword} from 'firebase/auth'
 import {Inter}  from "next/font/google";
+import { ref,getStorage, deleteObject,listAll } from "firebase/storage";
 export const inter=Inter({
     subsets: ['latin'],
     display: 'swap',
 })
 export default () => {
+    const storage = getStorage();
     const[loading,SetLoading]=useState(false)
     const auth=getAuth(app)
    const[modalVisible,SetModalVisible]=useState(false)
@@ -30,7 +32,7 @@ export default () => {
           if(snap.data().ip.includes(data['detectedIp'])){
            getDoc(doc(db,"users",localStorage.getItem('uid'))).then(data=>{
                 setName(data.data().name)
-                SetEmail(auth.currentUser.email)
+                SetEmail(data.data().email)
            }).catch((err)=>{alert(err.message);}); 
            SetLoading(false)
            
@@ -57,14 +59,25 @@ export default () => {
         <div className={styles.profileDiv}>
             <Text size={"xl"} className={`${styles.profileName} ${inter.profileName}`}>Profile</Text><br></br>
             <Text>Name: {name}</Text><br></br>
-            <Text>Email:{auth.currentUser.email}</Text><br></br>
+            <Text>Email:{email}</Text><br></br>
             <Modal opened={deleteModalVisible} onClose={()=>{setDeleteModalVisible(false)}}>
                 <Text size={"lg"} align="center">Are you Sure?</Text>
                 <PasswordInput placeholder="password" value={passwordModal} onChange={(e)=>{setPasswordModal(e.target.value)}} ></PasswordInput><br></br>
                 <Checkbox label="I understant i will loose my account" >I understant i will loose my account</Checkbox>
                 <br></br>
                 <center><Button  variant="outline" color="red" onClick={()=>{signInWithEmailAndPassword(auth,email,passwordModal).then(()=>{
-                    alert("bro serious")
+                 listAll(ref(storage)).then(res=>{
+                    res.items.forEach(element => {
+                       if(element.name.includes(auth.currentUser.uid)){
+                        deleteObject(element)
+                       }
+                    });
+                 })
+                 deleteDoc(doc(db,"users",auth.currentUser.uid));
+                 deleteUser(auth.currentUser)
+               
+                 localStorage.removeItem("uid")
+                 router.push('/auth')
                 }).catch((err)=>{alert(err.message)}) }}>Delete My account</Button></center>
             </Modal>
             <div style={{ display:'flex',justifyContent:'space-evenly'}}>

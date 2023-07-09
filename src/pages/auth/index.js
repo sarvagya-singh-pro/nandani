@@ -40,7 +40,7 @@ export default function auth() {
     
     else{
       SetVisible(true)
-      if(EmailError==="" && LoginpasswordError===""){
+      if(true){
      
            createUserWithEmailAndPassword(auth ,emailSignup,passwordSignup).then((user)=>{
               fetch('/api/ip').then(res=>{res.json().then(async(data) =>{
@@ -55,6 +55,8 @@ export default function auth() {
                     ip:arr,
                     name:nameSignup,
                     cattles:cattles,
+                    
+                email:emailSignup,
                   })
                   router.push('/dashboard')
                 }
@@ -67,6 +69,7 @@ export default function auth() {
                 name:nameSignup,
                 cattles:[],
                 checkups:[],
+                email:emailSignup,
               })
               localStorage.setItem("uid",auth.currentUser.uid)
 
@@ -75,7 +78,9 @@ export default function auth() {
             
             }
             })
-          })})}
+          })}).catch((err)=>{SetVisible(false)
+        
+            ;notifications.show({color:'red',message:err.message})})}
         }
         
          
@@ -83,8 +88,30 @@ export default function auth() {
   
 }
   const handleLogiIn=async()=>{
-    
-    alert("no")
+    SetVisible(true)
+    signInWithEmailAndPassword(auth,loginEmail,passwordLogin).then(()=>{
+      localStorage.setItem("uid",auth.currentUser.uid)
+      fetch('/api/ip').then(res=>{res.json().then(async(data) =>{
+        let snap= await getDoc(doc(db,"users",auth.currentUser.uid)) 
+          let arr=snap.data().ip
+          let cattles=snap.data()
+          arr.push(data['detectedIp'])
+          setDoc(doc(db,"users",auth.currentUser.uid),{
+            ip:arr,
+            name:nameSignup,
+            cattles:cattles.cattles,
+            email:loginEmail,
+          })
+          router.push('/dashboard')
+      
+      })})
+    }).catch(err=>{
+      SetVisible(false)
+      notifications.show({
+        message: err.message,
+        color:'red'
+      })
+    })
        
   
    
@@ -94,11 +121,28 @@ export default function auth() {
   .then((result) => { const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     
-    console.log(auth.currentUser.uid)
     fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${credential.accessToken}`).then(res=>{
-      res.json().then(data=>{console.log(data);alert(auth.currentUser.uid)})
+      res.json().then(data=>{console.log(data);alert(auth.currentUser.uid)
+        fetch('/api/ip').then((data)=>{
+          data.json().then(json=>{console.log(json)
+          setDoc(doc(db,"users",auth.currentUser.uid),{
+          name:result.user.displayName,
+          cattles:[],
+          checkups:[],
+          meeting:[],
+          ip:[json["detectedIp"]],
+          email:result.user.email,
+        })
+        
+      })
+      })
+        localStorage.setItem("uid",auth.currentUser.uid)
+
+        router.push('/dashboard')
+   
+      })
     })
-    const user = result.user;}).catch((error)=>{alert(error.message)})
+    const user = result.user;}).catch((error)=>{notifications.show({color:'red',message:error.message})})
   }
   function validateEmail(){
     var phoneno = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -158,6 +202,7 @@ const [lightTheme,SetLightTheme]=useState(true)
     }}>
    <div   >
     <Notifications/>
+    
     <LoadingOverlay visible={visible} overlayBlur={2} />
     <Header p="md" hiddenBreakpoint="sm" hidden={false} width={{ sm: 200, lg: 300 }}>
       <Box style={{display:'flex',flexDirection:'row'}}>

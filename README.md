@@ -1,38 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Hi everyone
 
-## Getting Started
+This is nandani [previously cattleit] Nandani is a platform that aims to provide milkmen across the city access to professional medical advice from veterinarians. It offers video call features to connect milkmen directly with vets across the city. Additionally, Nandani utilizes AI to help detect common diseases in cattle such as anthrax, blackleg, foot and mouth disease, lumpy virus, and pneumonia. By asking milkmen simple questions about the symptoms of their cows, Nandani provides preliminary diagnosis and guidance.
 
-First, run the development server:
+Features
+Video Call with Vets: Milkmen can connect with veterinarians through video calls to seek professional medical advice and assistance for their cattle.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Disease Detection: Nandani employs AI algorithms to detect common diseases in cattle. Milkmen can answer simple questions about the symptoms of their cows, and Nandani provides preliminary diagnosis and guidance based on the input.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Educational Resources: Nandani offers a collection of educational resources, including articles, videos, and guides, to help milkmen learn more about cattle health, disease prevention, and best practices.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Getting Started
+To get started with Nandani, follow these steps:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Clone the Nandani repository to your local machine.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Install the necessary dependencies by running npm install.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Start the application by running npm start.
 
-## Learn More
+Access the Nandani platform through the provided URL.
 
-To learn more about Next.js, take a look at the following resources:
+Usage
+Once you access the Nandani platform, you can explore the following functionalities:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Register an account as a milkman or log in if you already have an account.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Initiate a video call with a veterinarian to seek professional medical advice for your cattle.
 
-## Deploy on Vercel
+Use the AI-powered disease detection feature by answering simple questions about the symptoms of your cows.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Access educational resources to learn more about cattle health and disease prevention.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contributing
+I welcome contributions to enhance the Nandani platform. If you'd like to contribute, please follow these steps:
+
+Fork the Nandani repository.
+
+Create a new branch for your feature or bug fix.
+
+Make your changes and commit them with descriptive commit messages.
+
+Push your changes to your forked repository.
+
+Submit a pull request, explaining the changes you have made.
+
+I appreciate your contribution and will review it as soon as possible.
+
+License
+The Nandani project is licensed under the MIT License.
+
+Contact
+If you have any questions or feedback regarding Nandani, please reach out to us at singhsarvagya260508@gmail.com . I value your input and are happy to assist you.
+
+Thank you for using Nandani and helping to improve cattle health for milkmen across the city!

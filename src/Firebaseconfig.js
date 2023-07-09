@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyAKcHO1Wf-Gd6YCI0pOXZKWvAOoHJfu0Dc",
-  authDomain: "just-chat-5a316.firebaseapp.com",
-  projectId: "just-chat-5a316",
-  storageBucket: "just-chat-5a316.appspot.com",
-  messagingSenderId: "143974166555",
-  appId: "1:143974166555:web:876dacddc849671841c8be",
-  measurementId: "G-29M92SPY1S"
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId:process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket:process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGIN_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 };
 
 // Initialize Firebase

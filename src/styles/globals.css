@@ -1,4 +1,24 @@
 *{
     margin: 0px;
-    overflow: hidden;
+    
+}
+body{
+    
+    overflow-x: hidden;
+}
+
+.languageSelectDiv{
+position: fixed;
+right: 20px;
+width: 60px;
+height: 60px;
+bottom: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: #131313;
+border-radius: 10px;
+transform: translateX(0%);
+cursor: pointer;
+box-shadow: 2.5px 5px 5px rgb(13, 16, 221) ;
 }

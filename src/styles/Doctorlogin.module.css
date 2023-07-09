@@ -1,0 +1,9 @@
+.landing{
+    width: 100vw;
+    height: 100vh;
+    background: url('../../pexels-pixabay-40568.jpg') no-repeat fixed center;
+}
+.box{
+    background-color: rgba(79, 106, 228, 0.5);
+    background-blend-mode: multiply;
+}
