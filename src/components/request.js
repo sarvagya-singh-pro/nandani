@@ -96,14 +96,16 @@ const request = (props) => {
                      updateDoc(doc(db,"users",localStorage.getItem("uid")),{
                       checkups:r
                      }).then(()=>{
-                      getDoc(doc(db,"doctors",props.name)).then((data)=>{
+                      getDoc(doc(db,"doctors",props.name)).then(async (data)=>{
                         const arr=data.data().requests
                         arr.splice(arr.indexOf(props.el),1) 
-                       updateDoc(doc(db,"doctors",props.name),{
+                       await updateDoc(doc(db,"doctors",props.name),{
                              requests:arr
                        })
+                       SetOpend(false)
+
                      })
-                 ``    })
+                     })
                 })
         }
     }} style={{marginLeft:'50%',transform:'translateX(-50%)'}}> Confirm</Button>

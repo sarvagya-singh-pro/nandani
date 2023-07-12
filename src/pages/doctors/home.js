@@ -38,10 +38,11 @@ const home = (props) => {
                     getDoc(doc(db,"meetings",data.data().meeting[i])).then((data)=>{
                         ref.push(data.data())
                         SetMeeting(ref)
+                        
+                           SetLoading(false)   
 
                     })
-                    }          
-                    SetLoading(false)      
+                    }             
                 }
                 data.data().unavailable_dates.forEach(element => {
                   var ref = dates

@@ -64,7 +64,7 @@ function disease() {
       <div style={{width:'30vw',flexDirection:'column',height:'100%',minHeight:'20rem',marginRight:'30px',borderRadius:'0.5rem',background:'#5d6bfc',float:'right'}}>
         <Text mt="xl" color='#fff' align='center' size={"1.5rem"}>Symptoms</Text>
        
-       <div style={{height:'100%',position:'relative' ,display:'block',background:'#f00',justifyContent:'space-evenly'}}>
+       <div style={{height:'100%',position:'relative' ,display:'block',justifyContent:'space-evenly'}}>
         {
           data["symptoms"].map((el)=>{
             return(
