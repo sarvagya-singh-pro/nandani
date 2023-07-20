@@ -1,5 +1,5 @@
 import style from '../../styles/Auth.module.css'
-import{Header,LoadingOverlay, ColorSchemeProvider,MantineProvider, Input,Text,Card ,Box,PasswordInput,Button} from '@mantine/core'
+import{Header,LoadingOverlay, ColorSchemeProvider,MantineProvider, Input,Text,Card ,Box,PasswordInput,Button, Center} from '@mantine/core'
 import { useEffect, useState } from 'react'
 import {FcGoogle} from 'react-icons/fc'
 import {FaFacebook} from 'react-icons/fa'
@@ -246,9 +246,8 @@ const [lightTheme,SetLightTheme]=useState(true)
         custom={1}
       />
  </motion.svg></div>}
-          <Text>Application navbar</Text>
-          <motion.button title='click me'  initial={false}
-       onClick={()=>{SetLogignIn(!logingIn);console.log(logingIn)}} >click</motion.button>
+          <Text>Nandani</Text>
+       
    
         </Box>
         </Header>
@@ -295,9 +294,12 @@ const [lightTheme,SetLightTheme]=useState(true)
        <br></br>
        <div style={{display:'flex',alignItems:'center',width:'100%',justifyContent:'center'}}>
        <Button color='indigo' onClick={()=>{handleLogiIn()}} >Login</Button>
+   
        </div>
        <br></br>
-       <div className={style.icons} >
+      <Center> <Button variant="default" mb="md" title='click me'  initial={false}
+       onClick={()=>{SetLogignIn(!logingIn);console.log(logingIn)}} >Sign Up</Button>
+      </Center> <div className={style.icons} >
         <Card shadow='xl ' className={style.icon} onClick={()=>{googleLogin()}}  ><Card.Section ><FcGoogle/></Card.Section></Card>
         <Card shadow='xl'  className={style.icon} ><Card.Section><FaFacebook color='#4267B2'/></Card.Section></Card>
        </div>
@@ -338,7 +340,9 @@ const [lightTheme,SetLightTheme]=useState(true)
        <Button color='indigo' onClick={()=>{handleSignUp()}} >Sign Up</Button>
        </div>
        <br></br>
-       <div className={style.icons} >
+       <Center> <Button variant="default" mb="md" title='click me'  initial={false}
+       onClick={()=>{SetLogignIn(!logingIn);console.log(logingIn)}} >Login</Button>
+      </Center><div className={style.icons} >
         <Card shadow='xl 'onClick={()=>{googleLogin()}} className={style.icon} ><Card.Section><FcGoogle/></Card.Section></Card>
         <Card shadow='xl'  className={style.icon} ><Card.Section><FaFacebook color='#4267B2'/></Card.Section></Card>
        </div>

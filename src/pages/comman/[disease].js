@@ -43,13 +43,13 @@ function disease() {
       loop
       style={{float:'left'}}
       left={20}
-      w={'30vw'}
-     h={'20rem'}
+      w={'20rem'}
+     h={' 20rem'}
     >
 {images.map(el=>{return(
-      <Carousel.Slide h={'20rem'}  w={"30vw"} >
+      <Carousel.Slide h={'20rem'}  w={"20rem"} >
        
-        <Image h={'20rem'}   width={"30vw"} src={el }></Image>
+        <Image h={'20rem'}   width={"20rem"} src={el }></Image>
       </Carousel.Slide>
       
       )})}

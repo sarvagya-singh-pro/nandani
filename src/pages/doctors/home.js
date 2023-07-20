@@ -12,6 +12,7 @@ import {ImCross} from 'react-icons/im'
 import BannerImg from '../../../public/undraw_doctor_kw-5-l.svg'
 import dayjs from 'dayjs'
 import { DatePicker } from '@mantine/dates';
+import request from "../../components/request";
 const months=['januar', 'februar', 'march', 'april', 'may', 'june','july', 'august', 'september', 'october', 'november','december'];
 const home = (props) => {
     const router = useRouter();
@@ -84,7 +85,7 @@ const home = (props) => {
                     <Loader size={"lg"}></Loader>
                 </div>:<div>
                 <Header   bg={'#111'} height={65} p="xs">
-                <h1 >Cattleit</h1>
+                <h1 className="logo" >Nandani</h1>
             </Header>
             {meeting.length?meeting.map((el)=>{
                 return(
@@ -140,13 +141,16 @@ const home = (props) => {
 </Button>
 <Text mt={"2em"} align="center" size={"2rem"}>Appointments requests</Text>
 {
-     
+     reqests.length>0?
+
     reqests.map((el)=>{
          
         return(
                 <RequestDiv name={name} el={el}/>
         )
-    })
+    }):<div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'20rem',width:'100%'}}>
+        <Text>No Meetings Availabe</Text>
+    </div>
 
 }
 

@@ -2,8 +2,12 @@ import { useState } from 'react';
 import styles from '../../styles/checkup.module.css';
 import { Center, Modal, Header, NumberInput,Button, Text, Checkbox, Grid,Image } from "@mantine/core";
 import { AiOutlineWarning } from 'react-icons/ai';
+import Map from '../../components/Map'
 const Index = () => {
+  const [temp,SetTemp] = useState(100)
+  const [age,SetAge]=useState(0)
   const [open, setOpen] = useState(true);
+  const [tempErr,SetTempErr]=useState("")
   const [symptom, setSymptom] = useState([
     "painless lumps",
     "swelling in limb",
@@ -49,14 +53,19 @@ const Index = () => {
         <div style={{ width: '100%', marginTop: '1rem', display: 'flex', justifyContent: 'space-evenly' }}>
           <NumberInput
             style={{ width: '20rem', height: '3rem' }}
-            label="Temperature (°C)"
+            label="Temperature (°F)"
+            error={tempErr}
+            value={temp}
+            onChange={(e)=>{ if(e<100){ SetTempErr(" body temperature too low... this could be a sign of hypothermia") } else{SetTempErr("")} SetTemp(e)}}
             placeholder="Enter temperature"
             max={105}
-            min={100}
+            min={0}
           />
           <NumberInput
             style={{ width: '20rem', height: '3rem' }}
             label="Age"
+            value={age}
+            onChange={(e)=>{SetAge(e)}}
             placeholder="Enter Age"
             max={15}
             min={1}
@@ -80,7 +89,17 @@ const Index = () => {
             ))}
           </Grid>
         </div>
-     <Center><Button>Check For diseases</Button></Center>
+     <Center><Button onClick={()=>{
+      if(tempErr===""){
+        let arr=selected
+        if( typeof arr[0]==="boolean"){
+          arr.unshift(temp,age)
+        }
+        console.log(arr)
+
+      }
+     }}>Check For diseases</Button></Center>
+  
       </div>
     </div>
   );

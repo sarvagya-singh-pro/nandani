@@ -93,6 +93,10 @@ const request = (props) => {
                     }
                      r.push(appointment)
                      console.log(data.id)
+                     
+                     SetModalOpen(false)
+                     SetOpend(false)
+                    
                      updateDoc(doc(db,"users",localStorage.getItem("uid")),{
                       checkups:r
                      }).then(()=>{
@@ -102,8 +106,6 @@ const request = (props) => {
                        await updateDoc(doc(db,"doctors",props.name),{
                              requests:arr
                        })
-                       SetOpend(false)
-
                      })
                      })
                 })
@@ -111,6 +113,7 @@ const request = (props) => {
     }} style={{marginLeft:'50%',transform:'translateX(-50%)'}}> Confirm</Button>
     
             </Modal>
+            {opened?
         < motion.div  animate={ opened?"opend":"closed"}  transition={{duration:1}} variants={variant}  className={styles.request}>
         <Text size={"xl"}>{new Date(props.el.date["seconds"]*1000).getDate()} {months[new Date(props.el.date["seconds"]*1000).getMonth()]},    {new Date(props.el.date["seconds"]*1000).getFullYear()} </Text>
           <div onClick={()=>{SetOpend(false);
@@ -129,7 +132,9 @@ const request = (props) => {
           <div onClick={()=>{SetModalOpen(true)}} className={styles.check}>
           <FaCheck color="green"/>
           </div>
-      </motion.div>
+      </motion.div>:<div></div>
+}
+
       </div>
     );
 }

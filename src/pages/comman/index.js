@@ -31,7 +31,7 @@ const index = () => {
     return (
         <div>
             <Header  bg={'#111'} height={65} p="xs">{
-        <h1 className="logo">Cattleit</h1>}</Header>
+        <h1 className="logo">Nandani</h1>}</Header>
         { diseases && diseases.length>0?
          diseases.map((el)=>{
             return(

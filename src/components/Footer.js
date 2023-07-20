@@ -7,7 +7,7 @@ export default () => {
       <div style={{display:'flex',flexDirection:'row',width:'50vw',justifyContent:'space-around'}}>
         <div style={{display:'flex',flexDirection:'column'}}>
         <div style={{marginTop:'5rem',marginLeft:'1rem',display:'inline-block'}}  >
-        <h2 style={{color:'#fff',fontFamily:'sans-serif',fontWeight:200}}>Cattleit</h2>
+        <h2 style={{color:'#fff',fontFamily:'sans-serif',fontWeight:200}}>Nandani</h2>
         <br></br>
         <div style={{width:"20%",height:'1px',background:'#fff'}}></div>
         <div></div>
@@ -26,8 +26,8 @@ export default () => {
         <div></div>
          </div>
        <List color="#fff">
-        <Text color="#aaa" pt={"2rem"} pl={"1rem"} > cattleit@gmail.com </Text> 
-        <Text color="#aaa" pt={"1rem"} pl={"1rem"} > info.cattlelit@gmail.com</Text>
+        <Text color="#aaa" pt={"2rem"} pl={"1rem"} > nandani.health.web@gmail.com </Text> 
+        <Text color="#aaa" pt={"1rem"} pl={"1rem"} > +91 82529 13367</Text>
          
 
        </List>

@@ -29,13 +29,13 @@ export default function Home()  {
       </Group>
       </Header>
       <div className={styles.landing }>
-        <h1 className={`${comfortaa.yo}`}>Cattleit</h1>
+        <h1 className={`${comfortaa.yo}`}>Nandani</h1>
         <div className={styles.mainText}>
-        <p>We are excited to introduce Cattleit, an innovative medication recommendation system combined with a video call feature to connect you with healthcare professionals. With Cattleit, you can conveniently seek medical advice and receive personalized medication suggestions from our specilized Ai , all from the comfort of your own home.</p>
+        <p>We are excited to introduce Nandani, an innovative medication recommendation system combined with a video call feature to connect you with healthcare professionals. With Nandani, you can conveniently seek medical advice and receive personalized medication suggestions from our specilized Ai , all from the comfort of your own home.</p>
         
         <Button color='dark' variant='outline' onClick={()=>{router.push('/dashboard')}}>Dashboard</Button>
         </div>
-        <div className={styles.balckRep} style={{width:'100vw'}}></div>  
+        <div className={styles.balckRep} ></div>  
         </div>
         <div ref={ref}  className={styles.about}>
 
@@ -83,10 +83,10 @@ export default function Home()  {
 <div className={styles.me}>
 <div className={styles.line}></div>
 
-      <Text mt="xl" style={{marginLeft:'60%'}}  size={"2rem"} color='#fff'>Meet The Developer</Text>
+      <Text mt="xl" className={styles.meetText}  size={"2rem"} color='#fff'>Meet The Developer</Text>
       <Image className={styles.meImg}   height={"10rem"} src={Sarvagya}></Image>
 
-      <Text style={{width:'50%',marginTop:'-15%',textAlign:'center',marginLeft:'70%',transform:'translateX(-50%)'}} color='#fff'>
+      <Text className={styles.svInfo} color='#fff'>
         
 I am Sarvagya Singh, a passionate student specializing in web development, machine learning, and robotics. These fields have always fascinated me, and I have devoted myself to honing my skills and knowledge in each of them.In web development, I have had the opportunity to build entire websites from scratch. With a keen eye for detail and a strong understanding of programming languages and design principles, I strive to create websites that are both visually appealing and highly functional. It gives me immense satisfaction to see my projects come to life and provide a seamless user experience. Throughout my journey, I have been fortunate to receive guidance and mentorship from Md Obidullah Ansari and Pratik Kumar. Their expertise and support have been invaluable in shaping my skills and nurturing my growth. With their guidance, I have been able to tackle complex projects and push my boundaries further. As I continue on this journey, I look forward to embracing new challenges, expanding my skill set, and making a positive contribution to the world through my work in web development, machine learning, and robotics.
 skills and encouraging my development. I've been able to take on challenging assignments and go beyond my comfort zone because to their coaching. I'm excited to continue on this path, take on new challenges, broaden my skill set, and use my work in web development, machine learning, and robots to make the world a better place.

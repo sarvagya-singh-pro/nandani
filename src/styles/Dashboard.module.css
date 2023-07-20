@@ -75,6 +75,22 @@ left: 0px;
     
     background: #3468E4;
 }
+.bnavbutton{
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
+    margin-top: 3vh;
+    border-radius: 0.5rem;
+    color: #0a0a0a;
+    cursor: pointer;
+    width: 90%;
+
+}
+.bnavbutton:hover{
+    background: #eeeeee;
+}
 .arrow{
     font-size: 40px;
     color: #fff;

@@ -7,25 +7,31 @@ import {motion } from 'framer-motion'
 import styles from '../../styles/Dashboard.module.css'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Roboto } from 'next/font/google'
+import {RxHamburgerMenu} from 'react-icons/rx'
 import { notifications,Notifications  } from '@mantine/notifications';
 import{FcImageFile} from 'react-icons/fc'
 import LanguageDiv from '../../components/language'
-import { Text,MantineProvider,Select, Card } from "@mantine/core";
+import { useViewportSize } from '@mantine/hooks';
+
+import { Text,MantineProvider,Select,Center, Card, Drawer } from "@mantine/core";
 const roboto = Roboto({
   weight: '300',
   subsets: ['latin'],
 })
 const storage = getStorage();;
 
-
+import Map from '../../components/Map'
 import { AppShell, Navbar,Flex, Header,Loader, Avatar,Modal, Button, Group, Input, FileInput } from '@mantine/core';
 import{getAuth} from 'firebase/auth'
 const index = () => {
+  
+  const { height, width } = useViewportSize();
   let months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September', 'October', 'November', 'December']
    
   const auth=getAuth(app);
   const [cattles,setCattles]=useState([])
   const [value, setValue] = useState(null);
+  const [drawerOpen,SetDrawerOpen] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const router = useRouter()
     const [loading,SetLoading]=useState(true)
@@ -99,7 +105,7 @@ const index = () => {
            {loading?<div className={styles.loading} ><Loader size={"lg"}/></div>:<div className="main">
            <AppShell
       padding="md"
-      navbar={<Navbar  width={{ base: 300 }} bg="#012B90" m={'0px'}  p="xs">{<div className={styles.navigation}>
+      navbar={width>955? <Navbar  width={{ base: 300 }} bg="#012B90" m={'0px'}  p="xs">{<div className={styles.navigation}>
         <div style={{background:'#3468E4'}} className={styles.navbutton}>{language?"होम पेज":"Home"}</div>
         <div className={styles.navbutton}>{language?"स्वास्थ्य जांच":"Health checkup"}</div>
         <div onClick={()=>{router.push('/mycattles')}} className={styles.navbutton}>{language?"मेरी गायें":"My cattle"}</div>
@@ -111,22 +117,38 @@ const index = () => {
         animate={{x:isHovered?0:-10}}
         className={styles.arrow}>&gt;</motion.h2>
        </motion.div>
-        </div>}</Navbar>}
-      header={<Header  bg={'#111'} height={65} p="xs">{
-        <h1 className={roboto.logo}>Cattleit</h1>}</Header>}
+        </div>}</Navbar>:<div></div>}
+      header={
+      width>955?
+      <Header  bg={'#111'} height={65} p="xs">{
+        <h1 className="logo">Nandani</h1> }</Header>:
+        <Header  bg={'#111'} height={65} p="xs">{
+          <div  style={{width:'100%',alignItems:'center',display:'flex',flexDirection:'row'}}>
+          <RxHamburgerMenu onClick={()=>{SetDrawerOpen(!drawerOpen)}} size={"2rem"} style={{marginRight:'20px'}} color="#fff"></RxHamburgerMenu>
+          <h1 className="logo">Nandani</h1></div> }</Header>}
       styles={(theme) => ({
         main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
       })}
     >
+      <Drawer opened={drawerOpen}  onClose={()=>{SetDrawerOpen(false)}}>
+      <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'space-evenly'}}>
+      <div  className={styles.bnavbutton}>{language?"होम पेज":"Home"}</div>
+        <div className={styles.bnavbutton}>{language?"स्वास्थ्य जांच":"Health checkup"}</div>
+        <div onClick={()=>{router.push('/mycattles')}} className={styles.bnavbutton}>{language?"मेरी गायें":"My cattle"}</div>
+        <div onClick={()=>{router.push('/meet')}} className={styles.bnavbutton}>{language?"एक डॉक्टर से मिलें":"Meet a doctor"}</div>
+        <div onClick={()=>{router.push('/comman')}} className={styles.bnavbutton}>{language?"सामान्य रोग और उनके लक्षण":"common disease"}</div>
+  </div>       
+
+      </Drawer>
       {meetings?<Card mb={"xl"} h="12rem" shadow="sm" padding="lg" radius="md" withBorder>
      
       <Text  pt="md"  weight={500}>{language?"बैठक निर्धारित":"Meeting Scheduled"}</Text>
       <Group mt="md">
         <AiOutlineClockCircle/>
-      <Text   >{`${ new Date (meetings.time['seconds']*1000).getDate()} ${months[new Date (meetings.time['seconds']*1000).getMonth()]} ${ new Date (meetings.time['seconds']*1000).getFullYear()}`}</Text>
+      <Text   >{`${new Date (meetings.time['seconds']*1000).getDate()   } ${months[new Date (meetings.time['seconds']*1000).getMonth()]} ${ new Date (meetings.time['seconds']*1000).getFullYear()}`}</Text>
   
       </Group>
-  <Text>{new Date (meetings.time['seconds']*1000).getHours() }:{new Date (meetings.time['seconds']*1000).getMinutes()} - {new Date (meetings.time['seconds']*1000).getHours()+1 }:{new Date (meetings.time['seconds']*1000).getMinutes()}</Text>
+  <Text>{ parseInt(new Date (meetings.time['seconds']*1000).getHours())>9?new Date (meetings.time['seconds']*1000).getHours():new Date (meetings.time['seconds']*1000).getHours().toString().padStart(2,"0") }:{ parseInt(new Date (meetings.time['seconds']*1000).getMinutes())>9?new Date (meetings.time['seconds']*1000).getMinutes():new Date (meetings.time['seconds']*1000).getMinutes().toString().padStart(2,"0")} - {parseInt(new Date (meetings.time['seconds']*1000).getHours())+1>9?new Date (meetings.time['seconds']*1000).getHours()+1:parseInt(new Date (meetings.time['seconds']*1000).getHours()+1).toString().padStart(2,"0") }:{parseInt(new Date (meetings.time['seconds']*1000).getMinutes())>9?new Date (meetings.time['seconds']*1000).getMinutes():new Date (meetings.time['seconds']*1000).getMinutes().toString().padStart(2,"0")}</Text>
         <Button size="md" onClick={()=>{
           router.push(`/meet/${idMeeting}`)
           console.log(new Date (meetings.time['seconds']*1000).getTime()-(new Date (meetings.time['seconds']*1000).getTime()-10*1000))
@@ -174,7 +196,11 @@ const index = () => {
                 }).then(()=>{
                   SetLoading(false)
                   setUserDefined(true)
+                  setCattles(arr)
                 })
+                }
+                else{
+                  alert("there has been som error")
                 }
               }
               else{
@@ -227,7 +253,7 @@ const index = () => {
       
 
      
-      fetch(`http://localhost:5500/`).then((data)=>{
+      fetch(`http://localhost:4000/uid`).then((data)=>{
         data.json().then(async(json)=>{
           
           await getDoc(doc(db,"users",localStorage.getItem("uid"))).then(async (data)=>{
@@ -291,7 +317,8 @@ const index = () => {
     </div>
 
     }
-    
+    <Text pl={30} mt="xl">Medical stores in your area</Text>
+    <Center> <Map></Map></Center>
     <LanguageDiv></LanguageDiv>
 
     </AppShell>

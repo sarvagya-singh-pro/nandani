@@ -193,7 +193,7 @@ export default function home(){
   </div>:
   <>
      <Header  bg={'#111'} height={65} p="xs">{
-        <h1 className="roboto.logo">Cattleit</h1>}</Header>   
+        <h1 className="roboto.logo">Nandani</h1>}</Header>   
     
         <div className={styles.form} >
           <br></br>

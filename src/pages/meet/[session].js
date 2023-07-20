@@ -23,7 +23,7 @@ function session() {
   let peerConnection ;
     
   const router = useRouter();
-
+ const [joined,SetJoined]=useState(false)
   let socket
  const[messages,SetMessages]=useState([])
   const[micOpen,SetMicOpen]=useState(true)
@@ -138,8 +138,7 @@ function session() {
           peerConnection.oniceconnectionstatechange = async function() {
             if(peerConnection.iceConnectionState == 'disconnected') {
         
-              socket.emit('roomID',"ninja")
-             await peerConnection.setRemoteDescription(null)
+               await peerConnection.setRemoteDescription(null)
     
                peerConnection.close();
                 socket.emit('disconnected')
@@ -149,6 +148,8 @@ function session() {
         }
         peerConnection.onicecandidate = async (event) => {
               if(event.candidate){
+                
+         SetJoined(true)
                 let OfferD=peerConnection.localDescription
                socket.emit('request',OfferD)
              
@@ -174,6 +175,7 @@ function session() {
            })
        
            peerConnection.ontrack = async (event) => {
+            
                event.streams[0].getTracks().forEach((track) => {
                    remoteStream.addTrack(track)
                })
@@ -195,8 +197,9 @@ function session() {
          })
          
         socket.on("anwerData",(data)=>{
+          
           if(!peerConnection.currentRemoteDescription){
-        
+            
            peerConnection.setRemoteDescription(data).catch((err)=>{
               console.log(err)
            })
@@ -294,7 +297,7 @@ function session() {
       </motion.div>
 <div ref={doctorDiv} className={styles.doctor}>
 <video id="user-2" allow="camera;microphone" className="silhouetteVideo" autoPlay playsInline controls={false} />
-     {!remoteStream?
+     {!joined?
   <Text>Your Docotor Will Join You Soon</Text>:<div></div>}
 </div>
      

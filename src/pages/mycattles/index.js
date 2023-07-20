@@ -3,26 +3,29 @@ import {app,db} from '../../Firebaseconfig'
 import { useEffect, useState } from "react";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getDoc,doc,updateDoc } from "firebase/firestore";
-import { Avatar,Header,FileInput,Input,TextInput,Modal, Skeleton,Center, Card, AppShell,Navbar, Text, Badge, Button, Group, ScrollArea, Loader } from "@mantine/core";
+import { Avatar,Header,FileInput,Input,TextInput,Modal, Skeleton,Center, Card, AppShell,Navbar,Drawer, Text, Badge, Button, Group, ScrollArea, Loader } from "@mantine/core";
 import { useRouter } from "next/router";
 import {motion} from 'framer-motion'
 import { Roboto } from "next/font/google";
 import LanguageDiv from '../../components/language'
 import { FcImageFile } from "react-icons/fc";
+import{useViewportSize} from '@mantine/hooks'
 import { uploadBytes } from "firebase/storage";
 import styles from '../../styles/Dashboard.module.css'
+import { RxHamburgerMenu } from "react-icons/rx";
 const roboto = Roboto({
   weight: '300',
   subsets: ['latin'],
 })
 export default () => {
-
+  const { height,width}=useViewportSize()
     const [cattles,setCattles]=useState([])
     const [cattleImg,SetCattleImg]=useState([])
     const [modalOpen,setModalOpen]=useState(false)
     const[isHovered,setHovered]=useState(false)
     const [cattlename,Setcattlename]=useState("")
     const [breed,SetBreed]=useState("")
+    const [drawerOpen,SetDrawerOpen]=useState(false)
     const [value,setValue]=useState("")
     const[isLoading,SetLoading]=useState(false)
     const [language,SetLanguage]=useState(0)
@@ -111,7 +114,7 @@ export default () => {
                
                 if(breed.trim()!=""&& cattlename.trim()!="" ){
                   SetLoading(true)
-                const storageRef = ref(storage,auth.currentUser.uid+cattlename)
+                const storageRef = ref(storage,localStorage.getItem("uid")+cattlename)
                 uploadBytes(storageRef, value).then((snapshot) => {
                   console.log('Uploaded a blob or file!');
                
@@ -123,12 +126,12 @@ export default () => {
                     breed:breed,
   
                   }
-                  const snap= await getDoc(doc(db,"users",auth.currentUser.uid))
+                  const snap= await getDoc(doc(db,"users",localStorage.getItem("uid")))
                   if(snap.exists())
                   {
                     let arr=snap.data().cattles
                     arr.push(cattle)
-                  updateDoc(doc(db,"users",auth.currentUser.uid),{
+                  updateDoc(doc(db,"users",localStorage.getItem("uid")),{
                     cattles:arr
                   }).then(()=>{
                     router.reload()
@@ -150,27 +153,44 @@ export default () => {
             
            }
          </Modal>
+         <Drawer opened={drawerOpen}  onClose={()=>{SetDrawerOpen(false)}}>
+      <div style={{height:'100%',display:'flex',flexDirection:'column',justifyContent:'space-evenly'}}>
+      <div  onClick={()=>{router.push('/dashboard')}} className={styles.bnavbutton}><Text>{language?"होम पेज":"Home"}</Text></div>
+        <div className={styles.bnavbutton}><Text>{language?"स्वास्थ्य जांच":"Health checkup"}</Text></div>
+        <div className={styles.bnavbutton}><Text>{language?"मेरी गायें":"My cattle"}</Text></div>
+        <div onClick={()=>{router.push('/meet')}} className={styles.bnavbutton}><Text>{language?"एक डॉक्टर से मिलें":"Meet a doctor"}</Text></div>
+        <div onClick={()=>{router.push('/comman')}} className={styles.bnavbutton}><Text>{language?"सामान्य रोग और उनके लक्षण":"common disease"}</Text></div>
+  </div>       
+
+      </Drawer>
             <AppShell
       padding="md"
-      navbar={<Navbar  width={{ base: 300 }} bg="#012B90" m={'0px'}  p="xs">{<div className={styles.navigation}>
+      navbar={width>950? <Navbar  width={{ base: 300 }} bg="#012B90" m={'0px'}  p="xs">{<div className={styles.navigation}>
         <div onClick={()=>{router.push('/dashboard')}} className={styles.navbutton}>{language?"होम पेज":"Home"}</div>
         <div className={styles.navbutton}>{language?"स्वास्थ्य जांच":"Health checkup"}</div>
         <div style={{background:'#3468E4'}} className={styles.navbutton}>{language?"मेरी गायें":"My cattle"}</div>
         <div onClick={()=>{router.push('/meet')}} className={styles.navbutton}>{language?"एक डॉक्टर से मिलें":"Meet a doctor"}</div>
-        <div className={styles.navbutton}>{language?"सामान्य रोग और उनके लक्षण":"common disease"}</div>
+        <div onClick={()=>{router.push('/comman')}} className={styles.navbutton}>{language?"सामान्य रोग और उनके लक्षण":"common disease"}</div>
        <motion.div onClick={()=>{router.push('/profile')}} onHoverStart={()=>{setHovered(true)}} onHoverEnd={()=>{setHovered(false)}}  className={styles.profile}>
           <Avatar radius={"xl"} color="indigo" m={"sm"}  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
         <h1 className={roboto.profile} style={{color:'#fff',fontWeight:400}}>{language?"प्रोफ़ाइल":"Profile"}</h1><motion.h2 
         animate={{x:isHovered?0:-10}}
         className={styles.arrow}>&gt;</motion.h2>
        </motion.div>
-        </div>}</Navbar>}
+        </div>}</Navbar>:<div></div>}
       header={<Header  bg={'#111'} height={65} p="xs">{
-        <div  style={{width:'100%',display:'flex',flexDirection:'row'}}>
-      <h1 className="logo">Cattleit</h1>
+    <div style={{display:'flex',alignItems:'center',flexDirection:'row'}}>
+      {width<950?
+       <RxHamburgerMenu onClick={()=>{SetDrawerOpen(!drawerOpen)}} size={"2rem"} style={{marginRight:'20px'}} color="#fff"/>
+      :<div></div>}
+    <div  style={{width:'100%',display:'flex',flexDirection:'row'}}>
+      <h1 className="logo">Nandani</h1>
+     
+      </div>
       <Button onClick={()=>{setModalOpen(true)}} pos={"absolute"} right={"10%"} > {
                 language?"गाय जोड़ें":"Add A Cow"
               }</Button>  
+              
 </div>
       }</Header>}
       styles={(theme) => ({
@@ -181,7 +201,7 @@ export default () => {
             {
                 cattles.length===0?<div >
                   <Center>
-                  <Card w={"800px"}  mt="md" shadow="sm" padding="lg" radius="md" withBorder>
+                  <Card w={"99%"}  mt="md" shadow="sm" padding="lg" radius="md" withBorder>
                           <Skeleton height={50} circle mb="xl" />
       <Skeleton height={8} radius="xl" />
       <Skeleton height={8} mt={6} radius="xl" />
@@ -193,7 +213,7 @@ export default () => {
                 cattleImg.map((el,index)=>{
                     return(
                         <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
-                            <Card w={"800px"}  mt="md" shadow="sm" padding="lg" radius="md" withBorder>
+                            <Card w={"99%"}  mt="md" shadow="sm" padding="lg" radius="md" withBorder>
       
        <Avatar display={"inline-block"} radius={"xl"} src={cattleImg[index]["url"]}  size={"10em"}>
 
