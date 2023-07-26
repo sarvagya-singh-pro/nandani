@@ -15,16 +15,9 @@
   }
   
   body {
-    position: relative !important;
-    overflow-x: hidden;
     width: 100%;
     min-height: 100vh;
-  
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      align-items: flex-start;
+    overflow-x: hidden;
   }
 .logo{
     

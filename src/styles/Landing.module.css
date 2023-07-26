@@ -5,7 +5,7 @@
     height: auto;
     display: flex;
     align-items: center;        
-    margin-right: 0px;
+
     height: 150vh;
 
     background:linear-gradient(-315deg ,#fff 0%, rgb(1, 142, 212) 30%,#274DC6 70%,#103097);
@@ -138,6 +138,7 @@ justify-content: center;
     
 }
 .list {
+    
     display: block;
     width: 100%;
     display: flex;
@@ -232,7 +233,7 @@ justify-content: center;
     .landing{
         width: 100vw !important;
 
-        
+
     }
    .mainText p{
         font-size: medium;

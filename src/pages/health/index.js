@@ -89,11 +89,37 @@ const Index = () => {
             ))}
           </Grid>
         </div>
-     <Center><Button onClick={()=>{
+     <Center><Button onClick={async()=>{
       if(tempErr===""){
         let arr=selected
         if( typeof arr[0]==="boolean"){
           arr.unshift(temp,age)
+
+          const response =fetch('http://127.0.0.1:5000/',{
+            method: 'POST',
+            mode: 'no-cors',
+          
+            headers: {
+              "Content-Type": "application/json",
+              'Access-Control-Allow-Origin':'*'
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: {"data":JSON.stringify([arr])},
+             
+          }).then(data=>{
+            if(data.ok){
+              alert('success')
+            }
+            else{
+              console.log(data)
+            }
+          }).catch(err=>{
+            alert(err)
+          })
+
+          console.log({ "data":JSON.stringify([arr])})
+          console.log(response)
+          
         }
         console.log(arr)
 
