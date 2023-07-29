@@ -35,20 +35,20 @@ blisters (or vesicles) on the nose, tongue or lips, inside the oral cavity, betw
     </List>
     <br></br><Text pl={"lg"} size={"1.5rem"}>{ isEng?"Treatment":"इलाज"}</Text><br></br>
         <List withPadding>
-      <List.Item>{isEng?`Antimicrobials are effective against hemorrhagic septicemia if administered very early in the disease
-`:`
-यदि बीमारी की शुरुआत में ही एंटीमाइक्रोबियल दवाएं दी जाएं तो रक्तस्रावी सेप्टीसीमिया के खिलाफ प्रभावी होती हैं
- 
+      <List.Item>{isEng?`Lime`:`चूना 
 `}</List.Item>
 
-<List.Item>{isEng?`Antibiotic therapy was found to be effective when administered within 12 hours of the appearance of clinical symptoms.`:`नैदानिक लक्षण प्रकट होने के 12 घंटों के भीतर दिए जाने पर एंटीबायोटिक चिकित्सा प्रभावी पाई गई।`}</List.Item>
+<List.Item>{isEng?` Potassium Permagate`:`पोटेशियम परमैगेट`}</List.Item>
+<List.Item>{isEng?`Cheakpea Roti with onion ( 2 time one in morning one evening)
+`:`चने की रोटी प्याज के साथ (दो बार, एक सुबह एक शाम)`}</List.Item>
+<List.Item>{isEng?`Acetaminophen`:`एसिटामिनोफ़ेन`}</List.Item>
     
     <Text color="red">{isEng?'Injection to be prescribed by doctor' :'इंजेक्शन डॉक्टर द्वारा निर्धारित किया जाएगा'} </Text>
     <br></br>
     </List>
         <Carousel loop w={"20rem"} pl={"lg"}>
-        <Carousel.Slide><Image src={'https://i.ibb.co/nPqhhjW/image3.jpg'}></Image></Carousel.Slide>
-      <Carousel.Slide><Image src={'https://i.ibb.co/K95BZDL/image5.jpg'}></Image></Carousel.Slide>
+        <Carousel.Slide><Image src={'https://images2.imgbox.com/b1/0f/iMKd2CNC_o.png'}></Image></Carousel.Slide>
+      <Carousel.Slide><Image src={'https://images2.imgbox.com/4e/e2/q3Y9ketF_o.png'}></Image></Carousel.Slide>
    
         </Carousel>
 

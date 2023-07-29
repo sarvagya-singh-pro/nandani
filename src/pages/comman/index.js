@@ -14,10 +14,9 @@ const index = () => {
 redirect:'/blackleg'},
         {name:"Brucellosis",redirect:'Brucellosis'},
         {name:"Haemorrhagic Septicaemia",redirect:'hs'},
-        {name:"Infectious Bovine Rhinotracheitis",redirect:'foot'},
-        {name:"Foot and Mouth Disease"},
-        {name:"Foot Rot"},
-        {name:"Blue Tongue"}]
+        {name:"Lumpy Skin Disease",redirect:'lumpy'},
+        {name:"Foot and Mouth Disease",redirect:'foot'},
+        {name:"Foot Rot",redirect:'rot'},]
         )    
 
 
