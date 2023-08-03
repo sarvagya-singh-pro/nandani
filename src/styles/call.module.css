@@ -1,121 +1,123 @@
-.features{
-    width: 80vw;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    left: 0px;    
-    align-items: center;
-    bottom: 0px;
-    background: #274DC6;
-}
-.features div{
-    border-radius: 50%;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 50px;
-    height: 50px;
-    cursor: pointer;
-    background: rgba(168, 168, 168, 0.5);
-
-}
-.features div:hover{
-    background: rgb(22, 13, 146);
-}
-.features div:last-child{
-    background: rgb(207, 33, 33);
-}
-.chat{
-    display: block;
-    position: fixed;
-    right: 0px;
-    top:0px;
-    overflow-y: auto;
-    border: none;
+.call{
+    width: 100%;
     height: 100vh;
-    width: 30vw;
-    background: #f0f0f0;
+    background: rgb(243, 242, 242);
 }
-.chatList{
-    list-style: none;
-    width: 90%;
+.control{
+    position: absolute;
+    left: 0px;
     
-}
-.chatList li h3{
-    display: flex;
-    margin-bottom: 0.5rem;
-   align-items: center;
-    background: rgb(255, 255, 255);
-    height: 60px;
-   padding-left: 10px;
-    border-radius: 0.5rem;
-}
-.chatList li p{
-    display: block;
-    right: 0px;
-    font-size: 8px;
-    margin-bottom: 10px;
     bottom: 0px;
+    width: 100%;
+    height: 5rem;
+    background:#151527;
+}
+.main{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
 
 }
-.chatLabel{
-    width: 100%;
-    height: 50px;
-    background: rgb(58, 58, 204);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.chatLabel div{
-    width: 100%;
-    align-items: center;
-    justify-content: center;
+.accesories{
+    position: absolute;
+    right: 0px;
+    width: 8rem;
+    height: 100%;
+    background: transparent;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
-.doctor{
-    z-index: 0.5;
-    position: absolute;
-    background: #e6e6e6;
-      display: flex;
-      align-items: center;
-      justify-content: center; 
-    height: calc(100vh - 100px);
-    width: 70vw;
+.videos{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: calc( 100% - 5rem);
 }
-.box{
+.noVideo{
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    border-radius: 0.5rem;
-    background: #ffffff;
-    overflow-y: auto;
-    width: 50%;
-    height: 50%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+    align-items: center;
+    background: #5452c1;
 }
-.login{
+.noVideo div{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #274DC6;
-    width: 100vw;
-    height: 100vh; 
 }
-.chatBox{
-    padding-left: 20px;
-    position: fixed;
-    bottom: 20px;
-    border-radius: 1rem;
-    width: 25vw;
-    border: none;
-    outline: none;
-    right: -150px;
-    box-shadow: 0px 1px 10px #6e6e6e;
-    transform: translateX(-50%);
+.messageBubble{
+    width: 50%;
+    height: 5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.noVideo div div {
+    width: 150px;
+    height: 150px;
+    box-shadow: rgba(32, 32, 32, 0.2) 0px 8px 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2600ff;
+}
+.micActive{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff3a3a;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
     background: #ffffff;
-    height: 50px;
+    margin-right: 1rem;
+}
+.videoLable{
+    width: 20px;
+    height: 20px;
+    bottom: 0px;
+    background: #810000;
+    display: block;
+    z-index: 10;
+}
+.videos div{
+    position: relative;
+    height: 90%;
+    width: 90%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.videos div video{
+    width: 100%;
+    height: 100%;
+}
+.mic ,.camera,.chat,.more{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: rgba(151, 151, 151, 0.1);
+    margin-right: 1rem;
+}
+.mic ,.camera,.chat,.more:hover{
+    cursor: pointer;
 }

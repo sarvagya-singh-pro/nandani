@@ -16,6 +16,7 @@ function Call() {
 	const [ idToCall, setIdToCall ] = useState("")
 	const [ callEnded, setCallEnded] = useState(false)
 	const [ name, setName ] = useState("")
+	const [chatOpen,SetChatOpen]=useState(false)
 	const myVideo = useRef()
 	const userVideo = useRef()
 	const connectionRef= useRef()

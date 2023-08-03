@@ -18,6 +18,7 @@ const home = (props) => {
     const router = useRouter();
     const auth=getAuth()
     const[loading,SetLoading]=useState(true)
+    const [meetingsList,SetMeetings]=useState([])
     const [name,SetName]=useState("")
     const [dates,SetDates]= useState([]);
     const [reqests,SetRequest]=useState([])
@@ -29,6 +30,7 @@ const home = (props) => {
             
             SetName( auth.currentUser.email.replace("@gmail.com","").slice(0, 2) + " " + auth.currentUser.email.replace("@gmail.com","").slice(2,auth.currentUser.email.replace("@gmail.com","").length))
             
+
             let snap =getDoc(doc(db,"doctors",auth.currentUser.email.replace("@gmail.com","").slice(0, 2) + " " + auth.currentUser.email.replace("@gmail.com","").slice(2,auth.currentUser.email.replace("@gmail.com","").length))).then((data)=>{
                 console.log(data.data())
                 
@@ -87,7 +89,10 @@ const home = (props) => {
                 <Header   bg={'#111'} height={65} p="xs">
                 <h1 className="logo" >Nandani</h1>
             </Header>
-            {meeting.length?meeting.map((el)=>{
+            
+
+            
+            {meetingsList.length?meetingsList.map((el)=>{
                 return(
                     <Center>
                     <Card mt="xl" w="95%" shadow="sm" padding="lg" radius="md" withBorder>

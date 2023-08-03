@@ -95,20 +95,24 @@ const Index = () => {
         if( typeof arr[0]==="boolean"){
           arr.unshift(temp,age)
 
-          const response =fetch('http://127.0.0.1:5000/',{
-            method: 'POST',
-            mode: 'no-cors',
-          
-            headers: {
+          const response =fetch('http://127.0.0.1:4000/health',{
+         mode:'cors',
+          headers: {
               "Content-Type": "application/json",
-              'Access-Control-Allow-Origin':'*'
+              'Access-Control-Allow-Origin': '*',
+              "Access-Control-Allow-Methods":"GET, POST, OPTIONS",
+              "Access-Control-Allow-Headers":"Content-Type, Authorization"
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
+            method: 'POST',
             body: {"data":JSON.stringify([arr])},
              
           }).then(data=>{
             if(data.ok){
               alert('success')
+              data.json().then((json=>{
+                console.log(json)
+              }))
             }
             else{
               console.log(data)

@@ -108,7 +108,7 @@ const index = () => {
       navbar={width>955? <Navbar  width={{ base: 300 }} bg="#012B90" m={'0px'}  p="xs">{<div className={styles.navigation}>
         <div style={{background:'#3468E4'}} className={styles.navbutton}>{language?"होम पेज":"Home"}</div>
         <div className={styles.navbutton}>{language?"स्वास्थ्य जांच":"Health checkup"}</div>
-        <div onClick={()=>{router.push('/mycattles')}} className={styles.navbutton}>{language?"मेरी गायें":"My cattle"}</div>
+        <div onClick={()=>{router.push('/doctor')}} className={styles.navbutton}>{language?"डॉक्टरों":"Doctors"}</div>
         <div onClick={()=>{router.push('/meet')}} className={styles.navbutton}>{language?"एक डॉक्टर से मिलें":"Meet a doctor"}</div>
         <div onClick={()=>{router.push('/comman')}} className={styles.navbutton}>{language?"सामान्य रोग और उनके लक्षण":"common disease"}</div>
        <motion.div onClick={()=>{router.push('/profile')}} onHoverStart={()=>{setHovered(true)}} onHoverEnd={()=>{setHovered(false)}}  className={styles.profile}>
@@ -295,7 +295,7 @@ const index = () => {
     </div>
     :
     <div>
-          <div className={styles.healthReport}>
+          {/* <div className={styles.healthReport}>
         <h2>{language?"स्वास्थ्य रपट":"Health Report"}</h2>
         <p>{!language?"26 May 2023":"26 मई 2023"}</p>
         <div style={{display:'flex',marginLeft:'50%',justifyContent:'center',position:'absolute',flexDirection:'row',width:'100%',top:'50%',transform:'translate(-50%,-50%)'}}>
@@ -313,12 +313,12 @@ const index = () => {
       <div style={{display:'flex',height:'100%',justifyContent:'center',alignItems:'center'}}>
   
     
-    </div>
+    </div> */}
     </div>
 
     }
     <Text pl={30} mt="xl">Medical stores in your area</Text>
-    <Center> <Map></Map></Center>
+    <Center> <Map cords={[ -82.9071,40.4173]}></Map></Center>
     <LanguageDiv></LanguageDiv>
 
     </AppShell>

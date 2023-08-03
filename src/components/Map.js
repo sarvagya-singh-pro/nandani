@@ -17,7 +17,7 @@ const Map = (props) => {
   const centerCoordinates = [ 86.1511, 23.6693];
   const marker2=[ 84.85119062383082,25.53586779358031]
   const marker1=[ 86.1456568976087,23.674535893698813]
-  const zoomLevel = [8];
+  const zoomLevel = [13];
   console.log(props.cords)  
   return (
     <Mapbox
