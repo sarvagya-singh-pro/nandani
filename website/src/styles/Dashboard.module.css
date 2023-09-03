@@ -1,0 +1,119 @@
+
+.loading{
+display: flex;
+height: 100vh;
+width: 100vw;
+justify-content: center;
+align-items: center;
+background: rgba(#aaa,#aaa,#aaa);
+}
+.navigation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 75%;
+
+}
+.healthReport{
+    display: block;
+    width: 90%;
+    border-radius: 2em;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    height: 200px;
+    padding-left: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    color: #616161;
+    box-shadow: 2px 1px 1px 1px rgba(0,0,0,.2); ;
+    padding-top: 20px;
+    font-size: 0.8rem;
+}
+.modal{
+    min-height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    flex-direction: column;
+}
+
+.navbutton{
+    background: #012B90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
+    border-radius: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+    width: 90%;
+}
+.profile{
+    display: flex;
+    cursor: pointer;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    background: #012B90;
+left: 0px;
+    height: 20vh;
+    position: absolute;
+    bottom: 0px;
+}
+.profile:hover{
+   background: #02309b;
+}
+.header{
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    
+
+}
+
+.navbutton:hover{
+    
+    background: #3468E4;
+}
+.bnavbutton{
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12vh;
+    margin-top: 3vh;
+    border-radius: 0.5rem;
+    color: #0a0a0a;
+    cursor: pointer;
+    width: 90%;
+
+}
+.bnavbutton:hover{
+    background: #eeeeee;
+}
+.arrow{
+    font-size: 40px;
+    color: #fff;
+    font-weight: 300;
+}
+.profileDiv{
+    width: 50%;
+    height: 50vh;
+    transform: translate(-50%,-50%);
+    border-radius: 0.5rem;
+    display: flex;
+    padding-top:20px;
+    margin-left: 50%;
+  position: absolute;
+    flex-direction: column;
+    box-shadow: 2px 2px 4px #000;
+    margin-top:50vh;
+   
+    text-align: center;
+    background: #fffdfd;
+}
+.profileName{
+    color: #1f1f1f;
+    font-size: 2rem;
+
+}

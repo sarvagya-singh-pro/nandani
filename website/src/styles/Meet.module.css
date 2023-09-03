@@ -1,0 +1,80 @@
+.DatePickers{
+    width: 50%;
+    min-height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+top: 65px;
+    right: 0px;
+    background: linear-gradient(to top, #0331ca 0%, #0300b4 100%);
+}
+
+.datePicker{
+    width: 95%;
+    margin-top: 1%;
+    min-height: 95%;
+    text-align: center;
+    background:rgba(255, 255, 255, 0.2) ;
+    border-radius: 1rem;
+}
+.requestButton{
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2rem;
+}
+.requestButton:active{
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2rem;
+}
+.form{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.month{
+    color: #fff;
+    display: block;
+    font-size: 2rem;
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transform: translateX(-50%);
+    border-radius: 0.5rem;
+
+}
+.month:hover{
+
+    cursor: pointer;
+    background: #4560bb;
+}
+.days{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    color: #f0f0f0;
+}
+.number{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+    background:transparent;
+}
+@media only screen and (max-width: 900px){
+    .DatePickers{
+        display: none;
+    }
+    .form{
+        width: 100vw;
+    }
+}

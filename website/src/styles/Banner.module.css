@@ -1,0 +1,59 @@
+.banner{
+    width: 80vw;
+    height: 15rem;
+    margin-left: 50%;
+    border-radius: 2rem;
+    transform: translateX(-50%);
+    margin-top: 2rem;
+    background: #618FFF;
+}
+.datePicker{
+    position: absolute;
+    left: 10%;
+}
+.request{
+    background: #fff;
+    width: 80vw;
+    height: 10rem;
+    border: 2rem;
+    box-shadow: rgba(22, 22, 22, 0.2) 0px 8px 24px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 5%;
+
+}
+.cross{
+    border-radius:20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 0, 0,0.5);
+    float: right;
+    position: absolute;
+
+    right: 20px;
+
+}
+.check{
+    border-radius:20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background: rgba(60, 255, 0, 0.5);
+    float: right;
+    position: absolute;
+
+    right: 100px;
+
+
+}

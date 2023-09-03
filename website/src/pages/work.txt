@@ -1,0 +1,39 @@
+Things to be done:
+-comman diseases and their medicines 
+-video calll feature on the aloted date
+-test for probable diseases based on sympotoms 
+
+less important:
+-dark mode
+
+
+comman disease 
+Anthrax
+    taggering, trembling, breathing difficulty, convulsions
+
+Black quarter (black-leg)
+    Sudden high  fever (107ºF-108ºF)  and  the animal stops eating and ruminating.
+    Characteristic  hot   and   painful   swelling develops on loin and buttocks causing lameness.  Swelling  sometimes affects shoulders, chest and neck also. When pressed, a crackling sound is heard because of the gas accumulation in the swellings.
+Foot and mouth disease
+Rabies (Mad dog disease)
+Blue tongue
+Pox
+Brucellosis of sheep
+Tetanus
+Listeriosis
+Campylobactor abortion (vibriosis)
+Johne`s disease
+Bovine ephemeral fever
+Lesions
+Rinderpest
+Mastitis
+Footrot
+Bovine rhinotracheitis
+Piglet diarrhea or scour
+PPR (goat plague)
+Bovine babesiosis (tick fever)
+Theileriosis
+East coast fever
+Ringworm
+Milk fever
+Calf scour

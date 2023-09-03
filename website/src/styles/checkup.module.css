@@ -1,0 +1,13 @@
+.checkup input[type=number]{
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    border: 0.1px solid black;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 5px 14px;
+    width: 20rem;
+    height: 3rem;
+    margin-top: 10vh;
+    margin-left: 10vw;
+}

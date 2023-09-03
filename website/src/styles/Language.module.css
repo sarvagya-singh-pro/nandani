@@ -1,0 +1,44 @@
+.box{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    cursor: pointer;
+    width: 70%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    height: 3rem;
+    border-radius: 0.5rem;
+    background: #fff;
+    border: 2px solid rgb(172, 172, 172);
+}
+.languageUl{
+    display: block;
+    margin-left: 47% ;
+    transform: translateX(-50%);
+    min-width: 200px;
+    position: absolute;
+    padding: 0;   
+    list-style-type: none;
+    display: block;
+    border-radius: 0.5rem;
+    background: rgb(236, 236, 236);
+    width: 70%;
+
+}
+
+.languageUl li{
+    display: block;
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    padding-left: 25px;
+    display: flex;
+    align-items: center;
+
+}
+.languageUl li:hover{
+    color: #fff;
+    background: rgb(49, 97, 255);
+}
