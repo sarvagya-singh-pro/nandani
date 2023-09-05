@@ -84,7 +84,7 @@ console.log( );
   res.json({ "what is love": JSON.parse(JSON.parse(body)["message"],JSON.parse(body)["other"])})
 })
 
-http.listen(4000, "127.0.0.1");
+http.listen(process.env.PORT, "127.0.0.1");
 
 io.on('connection', (socket) => {
   console.log('A user connected');
