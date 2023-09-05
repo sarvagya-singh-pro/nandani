@@ -8,6 +8,8 @@ import styles from '../../styles/Dashboard.module.css'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Roboto } from 'next/font/google'
 import {RxHamburgerMenu} from 'react-icons/rx'
+import { getDatabase, ref as ref_real, set } from "firebase/database";
+
 import { notifications,Notifications  } from '@mantine/notifications';
 import{FcImageFile} from 'react-icons/fc'
 import LanguageDiv from '../../components/language'
@@ -19,7 +21,7 @@ const roboto = Roboto({
   subsets: ['latin'],
 })
 const storage = getStorage();;
-
+const realtime_database=getDatabase()
 import Map from '../../components/Map'
 import { AppShell, Navbar,Flex, Header,Loader, Avatar,Modal, Button, Group, Input, FileInput } from '@mantine/core';
 import{getAuth} from 'firebase/auth'
@@ -250,7 +252,7 @@ const index = () => {
     let year=new Date(checkup[0].date["seconds"]*1000).getFullYear()
       let dateOfAppointment=new Date(`${month} ${date},${year} ${timeSelect}`)
       console.log(dateOfAppointment)
-      
+       
 
      
       fetch(`http://localhost:4000/uid`).then((data)=>{
@@ -274,12 +276,14 @@ const index = () => {
             await updateDoc(doc(db,"users",localStorage.getItem("uid")),{
             meeting:refs
           })
+       
           await updateDoc(doc(db,"doctors",checkup[0].doctor),{
             meeting:refs
           })
           await setDoc(doc(db,"meetings",json["meeting"]),{
             time:dateOfAppointment,
-            doctor:checkup[0].doctor
+            doctor:checkup[0].doctor,
+            users:[]
           })
           await updateDoc(doc(db,"users",localStorage.getItem("uid")),{checkups:[]}).then(()=>{
             SetLoading(false)

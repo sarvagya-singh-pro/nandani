@@ -1,0 +1,14 @@
+.idea
+.vscode
+.DS_Store
+npm-debug.log
+
+lib/
+.tmp/
+.env/
+temp/
+typings/
+coverage/
+node_modules/
+.nyc_output/
+just-chat-5a316-firebase-adminsdk-lxix8-cd284ddfb7.json

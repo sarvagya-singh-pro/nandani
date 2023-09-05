@@ -12,6 +12,7 @@ import Medicine from './undraw_medicine_b-1-ol.svg'
 import {  getAuth,signInWithEmailAndPassword } from 'firebase/auth';
 import {motion} from 'framer-motion'
 import { AiOutlineUser } from 'react-icons/ai';
+import { setDoc,doc, getDoc, updateDoc } from 'firebase/firestore';
 function session() {
   let remoteStream
   const servers = {
@@ -153,12 +154,23 @@ function session() {
                 alert('Disconnected');
             }
         }
+       
         peerConnection.onicecandidate = async (event) => {
               if(event.candidate){
                 
          SetJoined(true)
                 let OfferD=peerConnection.localDescription
                socket.emit('request',OfferD)
+                const offerSend={
+                  offer: {
+                type: offer.type,
+                sdp: JSON.stringify(offer),
+            }
+          }
+        
+               await updateDoc(doc(db,"meetings",router.query.session),{
+                users:[offerSend]
+              })
              
               }
           }
@@ -168,9 +180,12 @@ function session() {
         
         })
        
-        socket.on('getAnswer',async(offer)=>{
+        socket.on('getAnswer',async()=>{
          console.log("ok")
-           remoteStream = new MediaStream()
+         alert(router.query.session)
+         const offer=JSON.parse((await getDoc(doc(db,"meetings",router.query.session))).data().users[0]["offer"]["sdp"])
+         console.log(offer)  
+         remoteStream = new MediaStream()
            document.getElementById('user-2').srcObject = remoteStream
      
            SetOtherVideo(true)
@@ -194,11 +209,16 @@ function session() {
                  let answerD=peerConnection.localDescription
                  console.log(answerD)
                  socket.emit('answer_m',answerD)
-               }
+
+                 await updateDoc(doc(db,"meetings",router.query.session),{
+                  users:[offer.toString(),answerD.toString()]
+                })
+                }
            }
            
            let answer=await peerConnection.createAnswer()
            console.log(answer)
+
            peerConnection.setLocalDescription(answer)
      
      
@@ -326,7 +346,7 @@ function session() {
         {micOpen?
       <div  onClick={()=>{SetMicOpen(!micOpen)}} className={styles.mic}>
       <BsMicFill/>
-      </div>: <div  onClick={()=>{SetMicOpen(!micOpen)}} className={styles.mic,styles.micActive}>
+      </div>: <div  onClick={()=>{SetMicOpen(!micOpen)}} className={styles.micActive}>
       <BsFillMicMuteFill />
       </div>
 }
