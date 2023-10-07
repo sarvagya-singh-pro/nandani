@@ -9,6 +9,7 @@ import { Button, Center, Drawer, Grid,ScrollArea, PasswordInput, Text, TextInput
 import styles from '../../styles/call.module.css'
 import {MdOutlineMoreVert} from 'react-icons/md'
 import Medicine from './undraw_medicine_b-1-ol.svg'
+import{GrClose} from 'react-icons/gr'
 import {  getAuth,signInWithEmailAndPassword } from 'firebase/auth';
 import {motion} from 'framer-motion'
 import { AiOutlineUser } from 'react-icons/ai';
@@ -114,9 +115,9 @@ function session() {
     const socketInitializer = async () => {
         if(router.isReady && webcamRef){
            const {id} = router.query
-      await fetch('http://localhost:4000/').then(( )=>{
+      await fetch('https://videocall-0xvg.onrender.com').then(( )=>{
         if(logedIn){
-        socket = io('http://localhost:4000/',{
+        socket = io('https://videocall-0xvg.onrender.com',{
           transports:["websocket"]
         })
         socket.emit("roomID",router.query.session)
@@ -272,12 +273,13 @@ function session() {
   {logedIn?
  
  <>
- <Drawer  position={"right"} onClose={()=>{SetChatOpen(false)}} opened={chatOpen} shadow={false}>
- <Drawer.Header>
-            <Drawer.Title><Text color='#03000f' size={"lg"}>Chat </Text></Drawer.Title>
-          </Drawer.Header>
-
-          <ScrollArea h={'70vh'}>
+ {chatOpen?
+ <div   className={styles.chatArea}  shadow={false}>
+  <div className={styles.ChatLabel}>
+    <Text pl={"xl"} pt="md">Chat </Text>
+    <GrClose onClick={()=>{SetChatOpen(false)}} style={{display:'block',position:'absolute',right:'10px',top:'16px',cursor:'pointer'}} />
+  </div>
+          <ScrollArea h={'18rem'}>
         {
          messages.map((el)=>{
             return(
@@ -290,15 +292,15 @@ function session() {
             </ScrollArea>       
  <div style={{width:'90%',position:'absolute',bottom:'1rem',display:'flex',alignItems:'center',justifyContent:'center'}}>
   <Grid columns={4}   w={"100%"} >
- <Grid.Col span={2}><TextInput
+ <Grid.Col span={3}><TextInput
  data-autofocus
           
       placeholder="Message.."
      id="chatBox"
     /></Grid.Col>
-    <Grid.Col span={2}>
+    <Grid.Col span={1}>
     <Button onClick={()=>{let message=document.querySelector('#chatBox').value
-    socket = io('http://localhost:4000/',{
+    socket = io('http://localhost:4000',{
         transports:["websocket"]
       })
     console.log(socket)
@@ -306,7 +308,8 @@ function session() {
     
     </Grid.Col>
     </Grid></div>
- </Drawer>
+ </div>:<div ></div>
+}
  <div className={styles.call}>
    
    <div className={styles.videos}>
@@ -362,7 +365,7 @@ function session() {
     </div>
     <div className={styles.accesories}>
   <Tooltip label={"chat"}>
-    <div onClick={()=>{SetChatOpen(true)}} className={styles.chat}>
+    <div onClick={()=>{SetChatOpen(!chatOpen)}} className={styles.chat}>
     <BsFillChatFill/>
     </div>
     </Tooltip>

@@ -32,7 +32,7 @@ export default function Home()  {
         {
         width<900?<div >
           <div className={styles.mobLand}>
-          <h1>Nandani</h1>
+          <img src='https://i.ibb.co/2K1FCG1/Whats-App-Image-2023-09-25-at-08-28-01-removebg-preview.png' alt='Nandani'></img>
           <Image className={styles.cow} src={cow}>
 
           </Image>

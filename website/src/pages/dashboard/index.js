@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getDoc,doc, setDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import{db,app} from '../../Firebaseconfig'
 import {motion } from 'framer-motion'
+import logo from './logo.png'
 import styles from '../../styles/Dashboard.module.css'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Roboto } from 'next/font/google'
@@ -15,7 +16,7 @@ import{FcImageFile} from 'react-icons/fc'
 import LanguageDiv from '../../components/language'
 import { useViewportSize } from '@mantine/hooks';
 
-import { Text,MantineProvider,Select,Center, Card, Drawer } from "@mantine/core";
+import { Text,MantineProvider,Select,Center,Image, Card, Drawer } from "@mantine/core";
 const roboto = Roboto({
   weight: '300',
   subsets: ['latin'],
@@ -123,7 +124,7 @@ const index = () => {
       header={
       width>955?
       <Header  bg={'#111'} height={65} p="xs">{
-        <h1 className="logo">Nandani</h1> }</Header>:
+        <Image pos={"fixed"} top={"0.5rem"} maw={"6em"}  src={"https://i.ibb.co/2K1FCG1/Whats-App-Image-2023-09-25-at-08-28-01-removebg-preview.png"} ></Image> }</Header>:
         <Header  bg={'#111'} height={65} p="xs">{
           <div  style={{width:'100%',alignItems:'center',display:'flex',flexDirection:'row'}}>
           <RxHamburgerMenu onClick={()=>{SetDrawerOpen(!drawerOpen)}} size={"2rem"} style={{marginRight:'20px'}} color="#fff"></RxHamburgerMenu>
@@ -255,7 +256,7 @@ const index = () => {
        
 
      
-      fetch(`http://localhost:4000/uid`).then((data)=>{
+      fetch(`https://videocall-0xvg.onrender.com/uid`).then((data)=>{
         data.json().then(async(json)=>{
           
           await getDoc(doc(db,"users",localStorage.getItem("uid"))).then(async (data)=>{

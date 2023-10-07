@@ -251,9 +251,13 @@ justify-content: center;
    
 
 }
-.mobLand h1{
+.mobLand img:nth-child(1){
     text-align: center;
-    padding-top: 50px;
+    margin-top: 50px;
+    width: 14em;
+    margin-left: 50%;
+    margin-bottom: -100px;
+    transform: translateX(-50%);
     font-weight: 400;
     color: #dbdbdb;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

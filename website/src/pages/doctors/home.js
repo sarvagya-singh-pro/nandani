@@ -11,8 +11,10 @@ import RequestDiv from '../../components/request'
 import {ImCross} from 'react-icons/im'
 import BannerImg from '../../../public/undraw_doctor_kw-5-l.svg'
 import dayjs from 'dayjs'
+
 import { DatePicker } from '@mantine/dates';
 import request from "../../components/request";
+import { Detailed } from "@react-three/drei";
 const months=['januar', 'februar', 'march', 'april', 'may', 'june','july', 'august', 'september', 'october', 'november','december'];
 const home = (props) => {
     const router = useRouter();
@@ -23,17 +25,39 @@ const home = (props) => {
     const [dates,SetDates]= useState([]);
     const [reqests,SetRequest]=useState([])
     const [meeting,SetMeeting]=useState([])
+    const [meetingScheduled,SetMeetingScheduled]=useState([])
+   useEffect(()=>{
+    async function getD(){
+        const times=[]
+        const snap=await getDoc(doc(db,"doctors",name))
+        snap.data().meeting.forEach(async(el)=>{
+        
+           const timeSnap= await getDoc(doc(db,"meetings",el))
+           console.log(timeSnap)
+           const time=await new Date(timeSnap.data().time["seconds"]*1000)
+           console.log(time)
+           times.push(time)
+        })
+        console.log(times)
+        SetMeetingScheduled(times)
+    }
+    if(name!=""){
+        getD()
+    }
+
+   },[name])
     useEffect(()=>{
 
         if(auth.currentUser?.email){
             SetLoading(false)
+         
             
             SetName( auth.currentUser.email.replace("@gmail.com","").slice(0, 2) + " " + auth.currentUser.email.replace("@gmail.com","").slice(2,auth.currentUser.email.replace("@gmail.com","").length))
             
 
             let snap =getDoc(doc(db,"doctors",auth.currentUser.email.replace("@gmail.com","").slice(0, 2) + " " + auth.currentUser.email.replace("@gmail.com","").slice(2,auth.currentUser.email.replace("@gmail.com","").length))).then((data)=>{
                 console.log(data.data())
-                
+           
                 SetRequest(data.data().requests)
                 let ref=[]
                 if(data.data().meeting.length>0){
@@ -47,6 +71,10 @@ const home = (props) => {
                     })
                     }             
                 }
+               data.data().meeting.forEach(async(et)=>{
+                console.log(et)
+
+                })
                 data.data().unavailable_dates.forEach(element => {
                   var ref = dates
                   ref.push(new Date(element["seconds"]*1000).toString())
@@ -144,6 +172,14 @@ const home = (props) => {
 }).then(()=>{SetLoading(false)}) }} style={{marginLeft:'50%',position:'relative',display:'block',transform:'translateX(-50%)'}}>
     Set Dates
 </Button>
+<Text mt={"2em"} align="center" size={"2rem"}>Scheduled Meetings</Text>
+{
+    meetingScheduled.map( (et)=>{
+    return(
+    <Text>Hello</Text>
+    )
+    })
+}
 <Text mt={"2em"} align="center" size={"2rem"}>Appointments requests</Text>
 {
      reqests.length>0?

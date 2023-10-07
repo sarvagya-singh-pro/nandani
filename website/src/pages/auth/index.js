@@ -6,7 +6,9 @@ import {FaFacebook} from 'react-icons/fa'
 import {useColorScheme} from '@mantine/hooks'
 import{motion} from 'framer-motion'
 import{doc,getDoc,setDoc} from 'firebase/firestore'
+import {useViewportSize} from '@mantine/hooks'
 import{db} from '../../Firebaseconfig'
+import { RxCross2 } from 'react-icons/rx'
 import { notifications,Notifications  } from '@mantine/notifications';
 import{getAuth, createUserWithEmailAndPassword,signInWithPopup,GoogleAuthProvider, signInWithEmailAndPassword} from 'firebase/auth'
 import { useRouter } from 'next/router'
@@ -171,6 +173,8 @@ let [EmailError,SetEmailError]=useState("")
 let [passwordLogin,SetPasswordLogin]=useState("")
 let [LoginpasswordError,SetLoginPasswordError]=useState("")
 let [emailSignup,SetEmailSignup]=useState("")
+const [isSignuningip,SetSigningUp]=useState(false)
+const { height, width }=useViewportSize()
 let [passwordSignup,SetPasswordSignup]=useState("")
 let [nameSignup,SetNameSignup]=useState("")
 let[visible,SetVisible]=useState(false)
@@ -251,6 +255,7 @@ const [lightTheme,SetLightTheme]=useState(true)
    
         </Box>
         </Header>
+        {width>600?
   <div className={style.main} >
     <motion.div animate={logingIn ? "initialState" : "animateState"} initial="initialState"  variants={{
       initialState:{
@@ -279,7 +284,7 @@ const [lightTheme,SetLightTheme]=useState(true)
       </Text>
       <br></br>
       <Input.Wrapper error={EmailError}>
-    <Input  error={EmailError}  inputMode='numeric' value={loginEmail} mask="+91 (000) 000-00-00" onFocus={()=>{SetEmailError('')}} onBlur={()=>{validateEmail()}} onChange={(e)=>{SetLoginEmail(e.target.value);}}   label="Email" placeholder='Email'></Input>
+    <Input  error={EmailError}  inputMode='email' value={loginEmail}  onFocus={()=>{SetEmailError('')}} onBlur={()=>{validateEmail()}} onChange={(e)=>{SetLoginEmail(e.target.value);}}   label="Email" placeholder='Email'></Input>
     </Input.Wrapper>
     <br></br>
     
@@ -296,6 +301,7 @@ const [lightTheme,SetLightTheme]=useState(true)
        <Button color='indigo' onClick={()=>{handleLogiIn()}} >Login</Button>
    
        </div>
+
        <br></br>
       <Center> <Button variant="default" mb="md" title='click me'  initial={false}
        onClick={()=>{SetLogignIn(!logingIn);console.log(logingIn)}} >Sign Up</Button>
@@ -347,7 +353,81 @@ const [lightTheme,SetLightTheme]=useState(true)
         <Card shadow='xl'  className={style.icon} ><Card.Section><FaFacebook color='#4267B2'/></Card.Section></Card>
        </div>
     </Card></div>
-    </div>
+    </div>:<div>
+      <h2 className={style.loginText}> Login</h2>
+      <Center>
+      <Input.Wrapper w="80%" mt="xl" error={EmailError}>
+    <Input  error={EmailError}  inputMode='email' mb="xl"    value={loginEmail}  onFocus={()=>{SetEmailError('')}} onBlur={()=>{validateEmail()}} onChange={(e)=>{SetLoginEmail(e.target.value);}}   label="Email" placeholder='Email'></Input>
+    </Input.Wrapper>
+    </Center>
+      <Center>
+      <PasswordInput
+    onFocus={()=>{SetLoginPasswordError("")}}
+    onBlur={()=>{validatePassword()}}
+      placeholder="Password"
+      value={passwordLogin}
+      w="80%"
+      onChange={(e)=>{SetPasswordLogin(e.target.value);}}
+      error={LoginpasswordError}
+       />
+       
+       
+       </Center>
+       
+  
+       <Center>
+       <Button mt="xl">
+        Login
+       </Button>
+       </Center>
+       <Center>
+        <Button onClick={()=>{SetSigningUp(true)}} variant="default" mb="md" mt="xl">
+          SignUp
+        </Button>
+       </Center>
+       {!isSignuningip?
+       <div  className={style.circleSvg} >
+ 
+ <div className={style.signUpMobile}>
+      </div>
+       </div>
+      
+     
+      :
+       <div className={style.mobSign}>
+        <RxCross2 onClick={()=>{
+          SetSigningUp(false)
+        }} className={style.MobCross}/>
+        <h1 className={style.SignUpTextMob}>Sign Up</h1>
+     <div style={{width:'100%',display:'flex',alignItems:'center',flexDirection:'column',justifyContent:'center'}}>
+    <Input w="80%" value={emailSignup} onChange={(e)=>SetEmailSignup(e.target.value)}   label="Email" placeholder='Email'></Input>
+    <br></br>
+    
+    <Input w="80%"  value={nameSignup} onChange={(e)=>{SetNameSignup(e.target.value)}} label="Name" placeholder='Name'></Input>
+    <br></br>
+    <PasswordInput
+    w="80%"
+      placeholder="Password"
+      value={passwordSignup}
+      onChange={(e)=>{SetPasswordSignup(e.target.value)}}
+       />
+    
+       <br></br>
+       <PasswordInput
+      w="80%"
+      placeholder="Confirm Password"
+      value={confirmPassword}
+      onChange={(e)=>{SetConfirmPassword(e.target.value)}}
+       />
+       </div>
+<br></br>
+<Center><Button  variant='white'>Sign Up</Button>
+</Center>
+       </div>
+       
+}
+
+   </div>}
    </div>
    </MantineProvider>
    </ColorSchemeProvider>

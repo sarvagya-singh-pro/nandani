@@ -12,6 +12,32 @@
     height: 5rem;
     background:#151527;
 }
+.ChatLabel{
+    display: flex;
+    flex-direction: row;
+    top: 0px;
+    width: 100%;
+    height: 3em;
+    border-bottom: 0.015px solid rgb(48, 48, 48);
+    border-top-left-radius: 1em;
+    
+    border-top-right-radius: 1em;
+    background: #fff;
+}
+.chatArea{
+    display: block;
+    z-index: 10;
+ 
+    height: 400px;
+    border-top-left-radius: 1em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-top-right-radius: 1em;
+    position: fixed;
+    animation: forwards 0.2s linear shoot;
+    background: #eeeded;
+    right: 1rem;
+    bottom: 80px;
+}
 .main{
     position: absolute;
     display: flex;
@@ -56,15 +82,16 @@
     justify-content: center;
 }
 .messageBubble{
-    width: 50%;
-    height: 5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
+    width: 90%;
+    background: #fff;
+    height: 4rem;
+    border-radius: 0.1rem;
+    margin-bottom: 1rem;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    margin-left: 10%;
+    margin-left: 5%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding-left: 20px;
 }
 .noVideo div div {
     width: 150px;
@@ -120,4 +147,13 @@
 }
 .mic ,.camera,.chat,.more:hover{
     cursor: pointer;
+}
+@keyframes shoot {
+ from{
+    width: 0px;
+    }
+    to{
+        width: 20rem;
+    }
+    
 }
