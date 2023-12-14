@@ -11,6 +11,12 @@ const blackleg = () => {
     },[])
     return (
         <div>
+         <audio
+        controls
+        src="https://dl.sndup.net/pms2/Untitled%20video%20-%20Made%20with%20Clipchamp%20(5).mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
             <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Info":"जानकारी"}</Text><br></br>
             <Text pl={"lg"} size={"lg"}>{ isEng?`An acute disease of cattle characterized by emphysematous swelling usually in heavy muscles.
 Buffaloes usually suffer from a milder form.
@@ -27,7 +33,7 @@ Healthy animals in the age group 6 months to 2 years are generally affected
 `:`अचानक तेज़ बुखार (107ºF-108ºF) और जानवर खाना और जुगाली करना बंद कर देता है।`}</List.Item>
       <List.Item>{isEng?`Characteristic  hot   and   painful   swelling develops on loin and buttocks causing lameness.  Swelling  sometimes affects shoulders, chest and neck also. When pressed, a crackling sound is heard because of the gas accumulation in the swellings.`:`कमर और नितंबों पर विशिष्ट गर्म और दर्दनाक सूजन विकसित हो जाती है जिससे लंगड़ापन हो जाता है। सूजन कभी-कभी कंधों, छाती और गर्दन को भी प्रभावित करती है। दबाने पर सूजन में गैस जमा होने के कारण चटकने की आवाज सुनाई देती है।`}</List.Item>
     </List>
-     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevension":"निवारण"}</Text><br></br>
+     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevention":"निवारण"}</Text><br></br>
         <List withPadding>
 <List.Item>{isEng?`Vaccinate all animals which are 6 months and above of age annually before the on­set of monsoon in endemic areas.`:`स्थानिक क्षेत्रों में मानसून की शुरुआत से पहले सालाना 6 महीने और उससे अधिक उम्र के सभी जानवरों का टीकाकरण करें।`}</List.Item>
       <List.Item>{isEng?`Burning the upper layer of soil with straw to eliminate spores may be of help in endemic areas`:`

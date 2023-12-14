@@ -207,7 +207,7 @@ justify-content: center;
  width: 50%;
 }
 .moreKnow{
-    width: 100%;
+    width: 120%;
     min-height: 70vh;
     background: #000;
 }
@@ -229,7 +229,7 @@ justify-content: center;
     position: absolute;
     display: block;
     transform: translateX(-50%);
-    margin-left: 50%;
+    margin-left: 60%;
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -245,7 +245,7 @@ justify-content: center;
     margin-left: 50%;
 }
 .mobLand{
-    width: 100%;
+    width: 120%;
     min-height: 100vh;
     background:linear-gradient(-315deg ,#fff 0%, rgb(1, 142, 212) 30%,#274DC6 70%,#103097);
    

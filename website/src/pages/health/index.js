@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/checkup.module.css';
-import { Center, Modal, Header, NumberInput,Button, Text, Checkbox, Grid,Image } from "@mantine/core";
+import { Center, Modal, Header, NumberInput,Button, Text, Checkbox,FileInput, Grid,Image, TextInput, List } from "@mantine/core";
 import { AiOutlineWarning } from 'react-icons/ai';
 import axios from 'axios'
 import Map from '../../components/Map'
@@ -8,9 +8,13 @@ import index from '../comman';
 import { useRouter } from 'next/router';
 const Index = () => {
   const router=useRouter()
-  const [temp,SetTemp] = useState(100)
+  const [temp,SetTemp] = useState(0)
   const [age,SetAge]=useState(0)
+  const [oxy,SetOxy]=useState(0)
+  const [mod,SetMod]=useState(false)
+  const [link,SetLink]=useState("")
   const [open, setOpen] = useState(true);
+  const[Names,SetNames]=useState([])
   const [tempErr,SetTempErr]=useState("")
   const [symptom, setSymptom] = useState([
     "painless lumps",
@@ -60,8 +64,8 @@ const Index = () => {
     'udder_pain', 'unwillingness_to_move', 'ulcers', 'vomiting',
     'weight_loss', 'weakness'
   ]);
-
-  const [selected, setSelected] = useState(Array(symptom.length).fill(false));
+  const[InfoDisease,SetInfoDIsease]=useState([])
+  const [selected, setSelected] = useState(Array(93).fill(false));
   useEffect(()=>{
     if(localStorage.getItem('language')==="Hindi"){
       setSymptom([
@@ -128,24 +132,74 @@ const Index = () => {
         <div style={{ width: '100%', marginTop: '1rem', display: 'flex', justifyContent: 'space-evenly' }}>
           <NumberInput
             style={{ width: '20rem', height: '3rem' }}
-            label="Temperature (°F)"
+            label="Temperature (°C)"
             error={tempErr}
             value={temp}
             onChange={(e)=>{ if(e<100){ SetTempErr(" body temperature too low... this could be a sign of hypothermia") } else{SetTempErr("")} SetTemp(e)}}
             placeholder="Enter temperature"
             max={105}
             min={0}
+
           />
+
           <NumberInput
             style={{ width: '20rem', height: '3rem' }}
-            label="Age"
+            label="Heart Rate"
             value={age}
             onChange={(e)=>{SetAge(e)}}
-            placeholder="Enter Age"
+            placeholder="Enter Heart Rate"
             max={15}
             min={1}
           />
+             <NumberInput
+            style={{ width: '20rem', height: '3rem' }}
+            label="Blood Oxygen"
+            value={oxy}
+            onChange={(e)=>{SetOxy(e)}}
+            placeholder="Enter Blood Oxygen"
+            max={15}
+            min={1}
+          />
+            <TextInput label="Link" value={link} onChange={(e)=>{SetLink(e.target.value)}}></TextInput>
+      
         </div>
+        <Center><Button mt="xl" variant='light' onClick={()=>{
+          if(link!=""){
+            axios.post('http://localhost:4000/getdata',{
+              data:link
+            }).then(res=>{SetAge(res.data["Heart Beat"]),
+          SetTemp(res.data["Temp"]);
+          SetOxy(res.data["Oxy"])})
+         
+            
+          }
+          else{
+            alert("Link not given")
+          }
+        }}> Get Sensor Data</Button></Center>
+
+        <Modal opened={mod} onClose={()=>{SetMod(false)}}>
+          <Text>THIS WILL CONTACT:</Text>
+          <List>
+            <List.Item mt="md">AMBULANCE</List.Item>
+            <List.Item mt="md">DOCTORS IN YOUR AREA</List.Item>
+          </List>
+        <Center><Button mt="xl" onClick={()=>{if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos)=>{console.log(pos.coords.latitude,pos.coords.longitude);
+      axios.post('http://localhost:4000/em',{
+        link:link,
+        cords:[pos.coords.latitude,pos.coords.longitude]
+      })}, ()=>{
+        alert('Location unavailable')
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }}} color='red'>CONTACT </Button></Center>
+        </Modal>
+        <Center><Button color='red' mt="xl" variant="gradient"
+        onClick={()=>{SetMod(true)}}
+      gradient={{ from: 'rgba(255, 143, 143, 1)', to: 'rgba(255, 0, 0, 1)', deg: 158 }} >EMERGENCY </Button></Center>
+        <Center><Text mt="xl">Symptoms</Text></Center>
         <div>
           <Grid justify="space-around" m={100} grow>
             {symptom.map((el, index) => (
@@ -166,43 +220,61 @@ const Index = () => {
         </div>
      <Center><Button onClick={async()=>{
       if(tempErr===""){
-        let arr=selected
-          if (typeof arr[0] === "boolean") {
-            arr.unshift(temp, age);
-          
-            try {
-              
-              const response = await axios.post('http://127.0.0.1:4000/health',{
-  
-                data: JSON.stringify(arr.slice(0, 26)),
-                data2: JSON.stringify(arr.slice(26,119))
-              },{
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                }
-              })
-          
-              if (response.statusText=="OK") {
-                console.log(response.data)
-                await router.push({
-                  pathname:'health/results',
-                  query: {data:JSON.stringify(response.data)}
-                },'health/results');
-              } else {
-                console.error('Response not OK:', response);
-              }
-            } catch (err) {
-              console.error('Fetch error:', err);
-            }
-          
+        if(link!=""){
 
-          console.log({ "data":JSON.stringify([arr])})
-          
+          let res=await axios.post('http://localhost:4000/health',{
+            data:[selected,link]
+          })
+          SetInfoDIsease(res.data["result"])
+          SetNames(res.data["info"])
+        //   const res=await fetch(link,{
+        //     method:['POST'],
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //       'Access-Control-Allow-Origin':'*' // Set the appropriate content type
+        //     },
+        //     body:{
+        //       'data':selected
+        //     }
+        //   }).catch(error=>{
+        //     alert(error)
+        //     console.log(error.message)
+        //   })
+        //   console.log(res)
+
+         }
+        else{
+          alert("Model Link Not given")
         }
-        console.log(arr)
-
       }
+      
      }}>Check For diseases</Button></Center>
+     <Center>
+     
+     </Center>
+     {
+      InfoDisease.map((el,index)=>{
+        return(
+          <div>
+         <Center> <Text mt="xl" fw="bold">{el}</Text></Center>
+         <Center><Text>{Names[index]}</Text></Center>
+         </div>
+        )
+      })
+     }
+       {/* <Center>
+       <FileInput
+       mt="xl"
+      w={"50%"}
+      label="Lumpy Detector"
+      placeholder="Uplod Image"
+    />
+    </Center>
+    <Center>
+      <Button variant='light' mt="xl" color='grape'>
+        Upload
+      </Button>
+    </Center> */}
   
       </div>
     </div>

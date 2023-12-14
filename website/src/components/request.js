@@ -90,6 +90,7 @@ const request = (props) => {
                       date:props.el.date,
                       time:[time1,time2,time3],
                       doctor:props.name,
+                      fees:props.fees,
                     }
                      r.push(appointment)
                      console.log(data.id)

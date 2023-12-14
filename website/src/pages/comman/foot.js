@@ -11,6 +11,12 @@ const blackleg = () => {
     },[])
     return (
         <div>
+               <audio
+        controls
+        src="https://dl.sndup.net/rm8v/Foot%20and%20Mouth.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
             <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Info":"जानकारी"}</Text><br></br>
             <Text pl={"lg"} size={"lg"}>{ isEng?`Foot and mouth disease (FMD) is a severe, highly contagious viral disease of livestock that has a significant economic impact. The disease affects cattle, swine, sheep, goats and other cloven-hoofed ruminants`:`खुरपका और मुंहपका रोग (एफएमडी) पशुओं की एक गंभीर, अत्यधिक संक्रामक वायरल बीमारी है जिसका महत्वपूर्ण आर्थिक प्रभाव पड़ता है। यह रोग मवेशी, सूअर, भेड़, बकरी और अन्य दो खुर वाले जुगाली करने वाले जानवरों को प्रभावित करता है।`}</Text><br></br>
 <br></br><Text pl={"lg"} size={"1.5rem"}>{ isEng?"Symptoms":"लक्षण"}</Text><br></br>
@@ -24,7 +30,7 @@ blisters (or vesicles) on the nose, tongue or lips, inside the oral cavity, betw
 `}</List.Item>
     
     </List>
-     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevension":"निवारण"}</Text><br></br>
+     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevention":"निवारण"}</Text><br></br>
         <List withPadding>
 <List.Item>{isEng?`Segregate the sick animal from healthy ones and avoid contamination of feed, fod­der and water.`:`बीमार जानवरों को स्वस्थ जानवरों से अलग रखें और चारा, चारे और पानी को प्रदूषित होने से बचाएं।
 `}</List.Item>

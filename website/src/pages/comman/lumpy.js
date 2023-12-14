@@ -11,6 +11,12 @@ const blackleg = () => {
     },[])
     return (
         <div>
+              <audio
+        controls
+        src="https://dl.sndup.net/p3bq/Untitled%20video%20-%20Made%20with%20Clipchamp%20(5)%20(1).mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
             <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Info":"जानकारी"}</Text><br></br>
             <Text pl={"lg"} size={"lg"}>{ isEng?`LSD is a disease of cattle characterised by fever, nodules on the skin,
 mucous membranes and internal organs, emaciation, enlarged lymph

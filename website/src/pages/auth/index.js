@@ -49,25 +49,22 @@ export default function auth() {
               let snap= await getDoc(doc(db,"users",auth.currentUser.uid))  
               if(snap.exists()){
                
-                if(snap.data().ip.includes(data)!=false){
-                  let arr=snap.data().ip
+                
                   let cattles=snap.data()
                   arr.push(data['detectedIp'])
                   setDoc(doc(db,"users",auth.currentUser.uid),{
-                    ip:arr,
                     name:nameSignup,
                     cattles:cattles,
                     
                 email:emailSignup,
                   })
                   router.push('/dashboard')
-                }
+                
                 
   
               }
               else{
               setDoc(doc(db,"users",auth.currentUser.uid),{
-                ip:[data["detectedIp"]],
                 name:nameSignup,
                 cattles:[],
                 checkups:[],
@@ -95,11 +92,9 @@ export default function auth() {
       localStorage.setItem("uid",auth.currentUser.uid)
       fetch('/api/ip').then(res=>{res.json().then(async(data) =>{
         let snap= await getDoc(doc(db,"users",auth.currentUser.uid)) 
-          let arr=snap.data().ip
           let cattles=snap.data()
           arr.push(data['detectedIp'])
           setDoc(doc(db,"users",auth.currentUser.uid),{
-            ip:arr,
             name:nameSignup,
             cattles:cattles.cattles,
             email:loginEmail,

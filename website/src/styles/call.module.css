@@ -12,6 +12,19 @@
     height: 5rem;
     background:#151527;
 }
+.TimeLable{
+    background: #fff;
+    width: 10rem;
+    height: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-bottom-right-radius: 1rem;
+    position: fixed;
+    top:0px;
+    left: 0px;
+}
 .ChatLabel{
     display: flex;
     flex-direction: row;

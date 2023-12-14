@@ -9,9 +9,9 @@ export default async function myRoute(
         pfp:'',
         location :[ 86.16293743376855,23.6663994908232]
     },{
-        name:`Dr. Laxmi Kumar`,
-        contact:`9572272638`,
-        location:[ -82.9071,40.4173]
+        name:`Dr. Mundrika Das`,
+        contact:`7942697462`,
+        location:[ 86.13664499757321,23.650773466542713]
     }
     ]
     res.send(doctors)

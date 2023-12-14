@@ -19,6 +19,7 @@ const months=['januar', 'februar', 'march', 'april', 'may', 'june','july', 'augu
 const home = (props) => {
     const router = useRouter();
     const auth=getAuth()
+    const [fees,Setfees]=useState(0)
     const[loading,SetLoading]=useState(true)
     const [meetingsList,SetMeetings]=useState([])
     const [name,SetName]=useState("")
@@ -57,7 +58,7 @@ const home = (props) => {
 
             let snap =getDoc(doc(db,"doctors",auth.currentUser.email.replace("@gmail.com","").slice(0, 2) + " " + auth.currentUser.email.replace("@gmail.com","").slice(2,auth.currentUser.email.replace("@gmail.com","").length))).then((data)=>{
                 console.log(data.data())
-           
+                Setfees(data.data().fees)
                 SetRequest(data.data().requests)
                 let ref=[]
                 if(data.data().meeting.length>0){
@@ -187,7 +188,7 @@ const home = (props) => {
     reqests.map((el)=>{
          
         return(
-                <RequestDiv name={name} el={el}/>
+                <RequestDiv fees={fees}  name={name} el={el}/>
         )
     }):<div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'20rem',width:'100%'}}>
         <Text>No Meetings Availabe</Text>

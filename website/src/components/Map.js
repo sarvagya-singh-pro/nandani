@@ -8,16 +8,16 @@ const Map = (props) => {
   const mapStyle = 'mapbox://styles/mapbox/streets-v11';
   const mapContainerStyle = {
     width: '95%',
-    height: '400px',
+    height: '500px',
     marginTop:'30px',
     marginBottom:'30px',
     borderRadius:'1rem',
   };
 
   const centerCoordinates = [ 86.1511, 23.6693];
-  const marker2=[ 84.85119062383082,25.53586779358031]
-  const marker1=[ 86.1456568976087,23.674535893698813]
-  const zoomLevel = [13];
+  const marker2=[  86.136644997573211,23.650773466542713]
+  const marker1=[ 86.16300344420783,23.65561515609579]
+  const zoomLevel = [15];
   console.log(props.cords)  
   return (
     <Mapbox

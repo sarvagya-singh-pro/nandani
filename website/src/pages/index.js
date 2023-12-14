@@ -41,6 +41,8 @@ export default function Home()  {
           We are excited to introduce Nandani, an innovative medication recommendation system combined with a video call feature to connect you with healthcare professionals. With Nandani, you can conveniently seek medical advice and receive personalized medication suggestions from our specilized Ai , all from the comfort of your own home.
           </p>
           <Center><Button mb="2rem" onClick={()=>{router.push('/dashboard')}} variant="white" size="xl" mt="2rem">Dashboard</Button></Center>
+          <Center><Button mb="2rem" onClick={()=>{router.push('/img')}} variant="white" size="xl" mt="2rem">Image Recognition</Button></Center>
+          
           </div>
           <div className={styles.moreKnow}>
           <h2>What we offer</h2>

@@ -6,17 +6,19 @@ import{db,app} from '../../Firebaseconfig'
 import {motion } from 'framer-motion'
 import logo from './logo.png'
 import styles from '../../styles/Dashboard.module.css'
+import {BsCreditCard} from 'react-icons/bs'
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { Roboto } from 'next/font/google'
 import {RxHamburgerMenu} from 'react-icons/rx'
 import { getDatabase, ref as ref_real, set } from "firebase/database";
-
+import { FaGooglePay } from "react-icons/fa";
 import { notifications,Notifications  } from '@mantine/notifications';
 import{FcImageFile} from 'react-icons/fc'
 import LanguageDiv from '../../components/language'
 import { useViewportSize } from '@mantine/hooks';
 
-import { Text,MantineProvider,Select,Center,Image, Card, Drawer } from "@mantine/core";
+import { useClickOutside } from '@mantine/hooks';
+import { Text,MantineProvider,Select,Center,Image, Card, Drawer, Dialog } from "@mantine/core";
 const roboto = Roboto({
   weight: '300',
   subsets: ['latin'],
@@ -34,9 +36,12 @@ const index = () => {
   const auth=getAuth(app);
   const [cattles,setCattles]=useState([])
   const [value, setValue] = useState(null);
+  const [dialogOpen,setDialogOpen]=useState(true)
+  const ref = useClickOutside(() => setDialogOpen(false));
   const [drawerOpen,SetDrawerOpen] = useState(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const router = useRouter()
+    const[paymentOptionOpen,SetPaymnetOptionOpen]=useState(false)
     const [loading,SetLoading]=useState(true)
     const [isHovered, setHovered] = useState(false)
     const [checkup,SetCheckup]=useState([])
@@ -58,8 +63,12 @@ const index = () => {
            fetch('/api/ip').then(res=>{res.json().then(async(data)=>{
 
           let snap=await getDoc(doc(db,"users",localStorage.getItem('uid'))).catch((err)=>{alert('no');router.push('/auth')});
-          if(snap.data().ip.includes(data['detectedIp'])){
+          console.log(snap.data())
            SetLoading(false)
+           if(snap.data().checkups?.length>0){
+            SetCheckup(snap.data().checkups)
+           
+           }
            if(snap.data().meeting?.length>0){
             getDoc(doc(db,"meetings",snap.data().meeting[0])).then((data)=>{
                if( (new Date().getTime()-60*60*1000)> (data.data().time["seconds"]*1000))
@@ -74,7 +83,7 @@ const index = () => {
             }).then(()=>{
               SetLoading(false)
             })
-           }
+           
            if(snap.data().cattles.length===0){
             
            }
@@ -82,15 +91,11 @@ const index = () => {
             setCattles(snap.data().cattles)
            }
            if(snap.data().checkups.length!=0){
-            SetCheckup(snap.data().checkups)
            }
           
           
           }
-          else{
-            console.log(data['detectedIp'])
-            router.push('/auth')
-          }
+          
 
         })}) 
             
@@ -102,6 +107,7 @@ const index = () => {
     },[])
     return (
       <MantineProvider withNormalizeCSS withGlobalStyles>
+        
            <Notifications />
         <div style={{ position:'absolute',top:'0px',margin:'0px'}}>
        
@@ -158,7 +164,7 @@ const index = () => {
         }} disabled={((new Date (meetings.time['seconds']*1000).getTime()-3000)> new Date().getTime() )||((new Date (meetings.time['seconds']*1000).getTime()+60*60*1000)< new Date().getTime()) } style={{left:'50%',transform:'translateX(-50%)'}} >{language?" शामिल हों":"Join"} </Button>
         </Card> :<div></div>}
       {
-           <Modal opened={cattles.length===0} onClose={()=>{notifications.show({
+           <Modal opened={localStorage.getItem('uid')==null} onClose={()=>{notifications.show({
             color:'red',
             title:'Sorry',
             message:'You Have To Add Atleast One Cattle'
@@ -171,19 +177,21 @@ const index = () => {
               <br></br> <p style={{textAlign:'left',color:'#555'}}>Select breed </p>
              <Input value={breed} onChange={(e)=>{SetBreed(e.target.value)}} component="select" label="Breed">
               <option value="">select breed</option>
-              <option value="breed1">Heeeello</option>
-              <option value="breed2">Hello</option>
-              <option value="breed3">Hello</option>
+              <option value="breed1">Gir Sindhi</option>
+              <option value="breed2">Sahiwal</option>
+              <option value="breed3">Tharparkar</option>
+              
+              <option value="breed3">Rathi</option>
              </Input>
              <br></br>
              <Button onClick={async()=>{if( value&&value["type"].includes("image/")){
                 SetLoading(true);
                 if(breed.trim()!=""&& cattlename.trim()!="" ){
-                const storageRef = ref(storage,auth.currentUser.uid+cattlename)
-                uploadBytes(storageRef, value).then((snapshot) => {
-                  console.log('Uploaded a blob or file!');
-                  SetLoading(false);
-                });
+                // const storageRef = ref(storage,auth.currentUser.uid+cattlename)
+                // uploadBytes(storageRef, value).then((snapshot) => {
+                //   console.log('Uploaded a blob or file!');
+                //   SetLoading(false);
+                // });
                 const cattle={
                   name:cattlename,
                   breed:breed,
@@ -222,7 +230,27 @@ const index = () => {
          </Modal>
     }
       {checkup.length>0?<div>
-        <Modal onClose={()=>{
+        <Modal zIndex={5090} onClose={()=>{SetPaymnetOptionOpen(false)}} opened={paymentOptionOpen}>
+          <Center><Button onClick={()=>{fetch('http://localhost:4000/pay',{
+         method:'POST',
+         headers: {    Accept: 'application.json'
+         ,'Content-Type': 'application/json'},
+        body:JSON.stringify({"doctor":checkup[0].doctor,"fees":checkup[0].fees}),
+       
+      }).then(async (res)=>{
+        if(res.ok){
+        const url=await res.json()
+        console.log(url["data"])
+        const openedWindow = window.open(url["url"],"_blank","location=yes,height=570,width=520,scrollbars=yes,status=yes")
+      
+      }})}} variant="default">
+          <BsCreditCard size={"1rem"}/>
+             <Text pl="md">Card</Text></Button></Center>
+             <Center>
+              <br></br>
+             
+              </Center></Modal>
+        <Modal  onClose={()=>{
           notifications.show({
             message:language?"अगर आप कैंसल करना चाहते हैं तो कैंसल बटन दबाएं":'If you want to cancle then press the cancle button',
           color:'red'
@@ -243,6 +271,7 @@ const index = () => {
       ]}
     />
     <div style={{display:'flex',flexDirection:'column'}}>
+      <Button mt="xl" color="green" onClick={()=>{SetPaymnetOptionOpen(true)}} >Confirm</Button>
     <Button mt="xl" onClick={()=>{
       SetLoading(true);
        months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September', 'October', 'November', 'December']
@@ -256,7 +285,7 @@ const index = () => {
        
 
      
-      fetch(`https://videocall-0xvg.onrender.com/uid`).then((data)=>{
+      fetch(`http://localhost:4000/uid`).then((data)=>{
         data.json().then(async(json)=>{
           
           await getDoc(doc(db,"users",localStorage.getItem("uid"))).then(async (data)=>{
@@ -293,7 +322,7 @@ const index = () => {
         })
         })
       })
-    }}  style={{left:'50%',transform:'translateX(-50%)'}}> {language?"पुष्टि करे":"Confim It"}</Button>
+    }}  style={{left:'50%',transform:'translateX(-50%)'}}> {language?"पुष्टि करे":"Confim It (Developer bypass)"}</Button>
     <Button mt="xl" onClick={()=>{SetCheckup([]);updateDoc(doc(db,"users",auth.currentUser.uid),{checkups:[]});language?notifications.show({color:'red',message:"कृपया इसे न दोहराएं डॉक्टरों के पास पहले से ही तंग कार्यक्रम हैं और यहां आपकी मुफ्त में मदद करने के लिए हैं"}):notifications.show({color:'red',message:"Please donot repeat this Doctors Already Have tight schedules and are here to Help you for free "})}} color="red"  style={{left:'50%',transform:'translateX(-50%)'}}>  {language?"रद्द":"Cancel"}</Button>
     </div>
     </Modal>
@@ -324,6 +353,11 @@ const index = () => {
     }
     <Text pl={30} mt="xl">Medical stores in your area</Text>
     <Center> <Map cords={[ 86.1511,23.6693]}></Map></Center>
+    <Text ml="md">New Chandra Medical </Text>
+    <Text ml="md"  mt="md">City pet clinic sector 1 (Only Doctor Available)</Text>
+    <Dialog withCloseButton ref={ref} opened={dialogOpen} onClose={()=>{setDialogOpen(false)}}  position={{bottom:100,right:20}}>
+      <Text>भाषा बदलने के लिए नीचे दिए गए बॉक्स पर क्लिक करें</Text>
+    </Dialog>
     <LanguageDiv></LanguageDiv>
 
     </AppShell>

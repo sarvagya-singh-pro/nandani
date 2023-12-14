@@ -37,7 +37,7 @@ export default () => {
                         <Card.Section>
 
                         </Card.Section>
-                          <a href={`https://www.google.com/maps?q=${el["location"][1]},${el["location"][0]}`}>  <Map cords={el["location"]}></Map></a>
+                          <a href={`https://www.google.com/maps?q=${el["location"][1]},${el["location"][0]}`}>  <Map  cords={el["location"]}></Map></a>
                         </Card>
                     )
                 })

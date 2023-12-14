@@ -11,6 +11,12 @@ const blackleg = () => {
     },[])
     return (
         <div>
+               <audio
+        controls
+        src="https://dl.sndup.net/cb5s/Brucellosis.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
             <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Info":"जानकारी"}</Text><br></br>
             <Text pl={"lg"} size={"lg"}>{ isEng?`Brucellosis is a bacterial infection that spreads from animals to people. Most commonly, people are infected by eating raw or unpasteurized dairy products. Sometimes, the bacteria that cause brucellosis can spread through the air or through direct contact with infected animals.
 `:`ब्रुसेलोसिस एक जीवाणु संक्रमण है जो जानवरों से लोगों में फैलता है। आमतौर पर, लोग कच्चे या बिना पाश्चुरीकृत डेयरी उत्पाद खाने से संक्रमित होते हैं। कभी-कभी, ब्रुसेलोसिस का कारण बनने वाले बैक्टीरिया हवा के माध्यम से या संक्रमित जानवरों के सीधे संपर्क के माध्यम से फैल सकते हैं।
@@ -26,7 +32,7 @@ const blackleg = () => {
 <List.Item>{isEng?`Joint, muscle and back pain`:`जोड़ों, मांसपेशियों और पीठ में दर्द`}</List.Item>
 <List.Item>{isEng?`Headache`:`सिर दर्द`}</List.Item>
  </List>
-     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevension":"निवारण"}</Text><br></br>
+     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevention":"निवारण"}</Text><br></br>
         <List withPadding>
 <List.Item>{isEng?` Vaccination of cattle, goats and sheep is recommended in enzootic areas with high prevalence rates
 `:`इस बीमारी के लिए टीकाकरण लें`}</List.Item>

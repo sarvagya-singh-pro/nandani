@@ -16,9 +16,11 @@
     "express": "^4.18.2",
     "firebase": "^9.22.2",
     "firebase-admin": "^11.9.0",
+    "instamojo-payment-nodejs": "^3.0.0",
     "nodemailer": "^6.9.3",
     "request": "^2.88.2",
-    "socket.io": "^4.6.2"
+    "socket.io": "^4.6.2",
+    "stripe": "^13.9.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"

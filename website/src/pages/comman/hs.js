@@ -11,6 +11,12 @@ const blackleg = () => {
     },[])
     return (
         <div>
+               <audio
+        controls
+        src="https://dl.sndup.net/z8mf/Haemorrhagic%20Septicaemia.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
             <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Info":"जानकारी"}</Text><br></br>
             <Text pl={"lg"} size={"lg"}>{ isEng?`Haemorrhagic septicaemia (HS) is a major disease of cattle and buffaloes characterised by an acute, highly fatal septicaemia with high morbidity and mortality. It is caused by certain serotypes of Pasteurella multocida that are geographically restricted to some areas of Asia, Africa, the Middle East and southern Europe. The disease has been recorded in wild mammals in several Asian and European countries. 
 `:`रक्तस्रावी सेप्टीसीमिया (एचएस) मवेशियों और भैंसों की एक प्रमुख बीमारी है, जिसमें उच्च रुग्णता और मृत्यु दर के साथ तीव्र, अत्यधिक घातक सेप्टीसीमिया होता है। यह पाश्चुरेला मल्टीसिडा के कुछ सीरोटाइप के कारण होता है जो भौगोलिक रूप से एशिया, अफ्रीका, मध्य पूर्व और दक्षिणी यूरोप के कुछ क्षेत्रों तक ही सीमित हैं। यह बीमारी कई एशियाई और यूरोपीय देशों में जंगली स्तनधारियों में दर्ज की गई है।
@@ -30,7 +36,7 @@ High temperature, sudden decrease in milk yield.
 सांस लेने में कठिनाई होने पर पशु घुरघुराने की आवाज निकालता है।
 `}</List.Item>
     </List>
-     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevension":"निवारण"}</Text><br></br>
+     <Text pl={"lg"} size={"1.5rem"}>{ isEng?"Prevention":"निवारण"}</Text><br></br>
         <List withPadding>
 <List.Item>{isEng?`Segregate the sick animal from healthy ones and avoid contamination of feed, fod­der and water.`:`बीमार जानवरों को स्वस्थ जानवरों से अलग रखें और चारा, चारे और पानी को प्रदूषित होने से बचाएं।
 `}</List.Item>

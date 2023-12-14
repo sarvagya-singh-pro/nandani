@@ -216,7 +216,7 @@ export default function home(){
                   const reqe={
                     name:name,
                     date:date,
-                    uid:auth.currentUser.uid
+                    uid:localStorage.getItem("uid")
                   }
                   req.push(reqe)
                  const current= Math.round(new Date().getTime())
